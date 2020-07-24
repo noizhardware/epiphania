@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Basic -->
+  <meta name="author" content="underscorediscovery">
+  <meta name='description' content='game/design/develop.'/>
+  <meta name='keywords' content='Ruby, underscorediscovery, _discovery, luxe, luxe engine, Oscean, Merveilles' />
+  <meta name="thumbnail" content="https://underscorediscovery.ca/media/diary/1.jpg" />
+  <link rel="shortcut icon" href="media/icon/favico.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@___discovery">
+  <meta name="twitter:title" content="game/design/develop">
+  <meta name="twitter:description" content="access endpoint: _discovery">
+  <meta name="twitter:creator" content="@___discovery">
+  <meta name="twitter:image" content="https://underscorediscovery.ca/media/diary/1.jpg">
+  
+  <link rel='stylesheet' type='text/css' href='reset.css'/>
+  <link rel='stylesheet' type='text/css' href='fonts.css'/>
+  <link rel='stylesheet' type='text/css' href='oscean.css'/>
+  <link rel='alternate'  type='application/rss+xml' title='Feed' href='links/rss.xml' />
+
+  <title>_discovery</title>
+</head>
+<body>
+     
+<div id="document" class="state_ready view_main theme_blanc">
+<div id="terminal"></div>
+<div id="header" class="dark">
+	<div id="photo" class=""> <!-- qui è lo sfondone in alto -->
+		<media style="background-image: url(&quot;img/1.jpg&quot;);"></media>
+	</div>
+	<div id="menu">
+		<a id="logo" data-goto="home" href="#home"></a>
+		<div id="info">
+			<svg id="glyph">
+				<path transform="scale(0.165,0.165) translate(-50,-50)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+			</svg>
+			<div id="title" class=""><a href="journal" data-goto="journal" target="_self" class="local  ">Augment Initialization</a> — 19Y04</div> <!-- latest thing -->
+		</div>
+		<input id="search" spellcheck="false">
+		<ul id="activity" class="">
+			<li><a href="calendar" data-goto="calendar" target="_self" class="local calendar ">Calendar</a></li>
+			<li><a href="journal" data-goto="journal" target="_self" class="local journal ">Journal</a></li>
+			<li><a href="tracker" data-goto="tracker" target="_self" class="local tracker ">Tracker</a></li>
+		</ul>
+	</div>
+</div>
+<div id="core">
+<div id="sidebar" class="">
+	<h1>access &nbsp;endpoint: <br><a href="about" data-goto="about" target="_self" class="local  ">&nbsp;&nbsp;_discovery</a><br></h1>
+	<ul class="directory">
+		<li class="parent"><a href="home" data-goto="home" target="_self" class="local  ">Home</a></li>
+		<li class="children "><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li class="children "><a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a></li>
+		<li class="children "><a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a></li>
+		<li class="children "><a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a></li>
+		<li class="children "><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li class="children "><a href="words" data-goto="words" target="_self" class="local  ">Words</a></li>
+	</ul>
+</div>
+<div id="content">
+<div id="main" class="">
+	<ul class="tidy col3">
+		<a data-goto="GAMES" href="#games">
+			<h2>Games</h2>
+		</a>
+		<h4>The <a href="games" data-goto="games" target="_self" class="local  ">Games</a> index contains past &amp; present games I've worked on.</h4>
+		<a data-goto="VISUAL" href="#visual">
+			<h2>Visual</h2>
+		</a>
+		<h4>The <a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a> index contains art, visual design and photography.</h4>
+		<a data-goto="TOOLS" href="#tools">
+			<h2>Tools</h2>
+		</a>
+		<h4>The <a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a> index contains tools to create games and personal tools.</h4>
+		<a data-goto="AUDIO" href="#audio">
+			<h2>Audio</h2>
+		</a>
+		<h4>The <a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a> index contains music &amp; audio projects and references.</h4>
+		<a data-goto="LIFE" href="#life">
+			<h2>Life</h2>
+		</a>
+		<h4>The <a href="life" data-goto="life" target="_self" class="local  ">Life</a> index contains experiences, like travel and change.</h4>
+		<a data-goto="WORDS" href="#words">
+			<h2>Words</h2>
+		</a>
+		<h4>The <a href="words" data-goto="words" target="_self" class="local  ">Words</a> index contains writing on <a href="code" data-goto="code" target="_self" class="local  ">Code</a>, <a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a> and Thoughts.</h4>
+	</ul>
+	<p class=""><a href="about" data-goto="about" target="_self" class="local  ">About this endpoint</a></p>
+	<hr class="line">
+	<p class="">recent</p>
+	<ul class="tidy col3">
+		<li><a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a></li>
+		<li><a href="augment" data-goto="augment" target="_self" class="local  ">Augment</a></li>
+		<li><a href="artwork+3d" data-goto="artwork+3d" target="_self" class="local  ">Artwork 3d</a></li>
+		<li><a href="scratch" data-goto="scratch" target="_self" class="local  ">Scratch</a></li>
+		<li><a href="kinesea" data-goto="kinesea" target="_self" class="local  ">Kinesea</a></li>
+		<li><a href="horaire" data-goto="horaire" target="_self" class="local  ">Horaire</a></li>
+		<li><a href="luxe" data-goto="luxe" target="_self" class="local  ">Luxe</a></li>
+		<li><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li><a href="artwork" data-goto="artwork" target="_self" class="local  ">Artwork</a></li>
+		<li><a href="operator+overload+ost" data-goto="operator+overload+ost" target="_self" class="local  ">Operator Overload Ost</a></li>
+		<li><a href="oscean" data-goto="oscean" target="_self" class="local  ">Oscean</a></li>
+		<li><a href="meandery" data-goto="meandery" target="_self" class="local  ">Meandery</a></li>
+		<li><a href="canada" data-goto="canada" target="_self" class="local  ">Canada</a></li>
+		<li><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li><a href="errent" data-goto="errent" target="_self" class="local  ">Errent</a></li>
+		<li><a href="moments" data-goto="moments" target="_self" class="local  ">Moments</a></li>
+	</ul>
+</div>
+<div id="journal" class="">
+<div class="entry log event">
+<div id="terminal"></div>
+<div id="header" class="dark">
+	<div id="photo" class="">
+		<media style="background-image: url(&quot;media/diary/1.jpg&quot;);"></media>
+	</div>
+	<div id="menu">
+		<a id="logo" data-goto="home" href="#home"></a>
+		<div id="info">
+			<svg id="glyph">
+				<path transform="scale(0.165,0.165) translate(-50,-50)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+			</svg>
+			<div id="title" class=""><a href="journal" data-goto="journal" target="_self" class="local  ">Augment Initialization</a> — 19Y04</div>
+		</div>
+		<input id="search" spellcheck="false">
+		<ul id="activity" class="">
+			<li><a href="calendar" data-goto="calendar" target="_self" class="local calendar ">Calendar</a></li>
+			<li><a href="journal" data-goto="journal" target="_self" class="local journal ">Journal</a></li>
+			<li><a href="tracker" data-goto="tracker" target="_self" class="local tracker ">Tracker</a></li>
+		</ul>
+	</div>
+</div>
+<div id="photo" class="">
+	<media style="background-image: url(&quot;media/diary/1.jpg&quot;);"></media>
+</div>
+<div id="menu">
+	<a id="logo" data-goto="home" href="#home"></a>
+	<div id="info">
+		<svg id="glyph">
+			<path transform="scale(0.165,0.165) translate(-50,-50)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+		</svg>
+		<div id="title" class=""><a href="journal" data-goto="journal" target="_self" class="local  ">Augment Initialization</a> — 19Y04</div>
+	</div>
+	<input id="search" spellcheck="false">
+	<ul id="activity" class="">
+		<li><a href="calendar" data-goto="calendar" target="_self" class="local calendar ">Calendar</a></li>
+		<li><a href="journal" data-goto="journal" target="_self" class="local journal ">Journal</a></li>
+		<li><a href="tracker" data-goto="tracker" target="_self" class="local tracker ">Tracker</a></li>
+	</ul>
+</div>
+<a id="logo" data-goto="home" href="#home"></a>
+<div id="search"></div>
+<ul id="activity" class="">
+	<li><a href="calendar" data-goto="calendar" target="_self" class="local calendar ">Calendar</a></li>
+	<li><a href="journal" data-goto="journal" target="_self" class="local journal ">Journal</a></li>
+	<li><a href="tracker" data-goto="tracker" target="_self" class="local tracker ">Tracker</a></li>
+</ul>
+<div id="info">
+	<svg id="glyph">
+		<path transform="scale(0.165,0.165) translate(-50,-50)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+	</svg>
+	<div id="title" class=""><a href="journal" data-goto="journal" target="_self" class="local  ">Augment Initialization</a> — 19Y04</div>
+</div>
+<div id="glyph"></div>
+<div id="title" class=""><a href="journal" data-goto="journal" target="_self" class="local  ">Augment Initialization</a> — 19Y04</div>
+<div id="core">
+<div id="sidebar" class="">
+	<h1>access &nbsp;endpoint: <br><a href="about" data-goto="about" target="_self" class="local  ">&nbsp;&nbsp;_discovery</a><br></h1>
+	<ul class="directory">
+		<li class="parent"><a href="home" data-goto="home" target="_self" class="local  ">Home</a></li>
+		<li class="children "><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li class="children "><a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a></li>
+		<li class="children "><a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a></li>
+		<li class="children "><a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a></li>
+		<li class="children "><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li class="children "><a href="words" data-goto="words" target="_self" class="local  ">Words</a></li>
+	</ul>
+</div>
+<div id="content">
+<div id="main" class="">
+	<ul class="tidy col3">
+		<a data-goto="GAMES" href="#games">
+			<h2>Games</h2>
+		</a>
+		<h4>The <a href="games" data-goto="games" target="_self" class="local  ">Games</a> index contains past &amp; present games I've worked on.</h4>
+		<a data-goto="VISUAL" href="#visual">
+			<h2>Visual</h2>
+		</a>
+		<h4>The <a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a> index contains art, visual design and photography.</h4>
+		<a data-goto="TOOLS" href="#tools">
+			<h2>Tools</h2>
+		</a>
+		<h4>The <a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a> index contains tools to create games and personal tools.</h4>
+		<a data-goto="AUDIO" href="#audio">
+			<h2>Audio</h2>
+		</a>
+		<h4>The <a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a> index contains music &amp; audio projects and references.</h4>
+		<a data-goto="LIFE" href="#life">
+			<h2>Life</h2>
+		</a>
+		<h4>The <a href="life" data-goto="life" target="_self" class="local  ">Life</a> index contains experiences, like travel and change.</h4>
+		<a data-goto="WORDS" href="#words">
+			<h2>Words</h2>
+		</a>
+		<h4>The <a href="words" data-goto="words" target="_self" class="local  ">Words</a> index contains writing on <a href="code" data-goto="code" target="_self" class="local  ">Code</a>, <a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a> and Thoughts.</h4>
+	</ul>
+	<p class=""><a href="about" data-goto="about" target="_self" class="local  ">About this endpoint</a></p>
+	<hr class="line">
+	<p class="">recent</p>
+	<ul class="tidy col3">
+		<li><a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a></li>
+		<li><a href="augment" data-goto="augment" target="_self" class="local  ">Augment</a></li>
+		<li><a href="artwork+3d" data-goto="artwork+3d" target="_self" class="local  ">Artwork 3d</a></li>
+		<li><a href="scratch" data-goto="scratch" target="_self" class="local  ">Scratch</a></li>
+		<li><a href="kinesea" data-goto="kinesea" target="_self" class="local  ">Kinesea</a></li>
+		<li><a href="horaire" data-goto="horaire" target="_self" class="local  ">Horaire</a></li>
+		<li><a href="luxe" data-goto="luxe" target="_self" class="local  ">Luxe</a></li>
+		<li><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li><a href="artwork" data-goto="artwork" target="_self" class="local  ">Artwork</a></li>
+		<li><a href="operator+overload+ost" data-goto="operator+overload+ost" target="_self" class="local  ">Operator Overload Ost</a></li>
+		<li><a href="oscean" data-goto="oscean" target="_self" class="local  ">Oscean</a></li>
+		<li><a href="meandery" data-goto="meandery" target="_self" class="local  ">Meandery</a></li>
+		<li><a href="canada" data-goto="canada" target="_self" class="local  ">Canada</a></li>
+		<li><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li><a href="errent" data-goto="errent" target="_self" class="local  ">Errent</a></li>
+		<li><a href="moments" data-goto="moments" target="_self" class="local  ">Moments</a></li>
+	</ul>
+</div>
+<div id="journal" class="">
+<div class="entry log event">
+	<svg data-goto="LIFE" class="icon">
+		<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+	</svg>
+	<div class="head">
+		<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="19A00">19A00</span></div>
+		<div class="bref">Snow Initialization</div>
+	</div>
+</div>
+<div class="entry log event">
+<svg data-goto="LIFE" class="icon">
+	<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+</svg>
+<div class="head">
+	<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="18O00">18O00</span></div>
+	<div class="bref">Moved to Vancouver</div>
+</div>
+<img src="media/diary/6.jpg" data-goto="Life">
+<div id="content">
+<div id="main" class="">
+	<ul class="tidy col3">
+		<a data-goto="GAMES" href="#games">
+			<h2>Games</h2>
+		</a>
+		<h4>The <a href="games" data-goto="games" target="_self" class="local  ">Games</a> index contains past &amp; present games I've worked on.</h4>
+		<a data-goto="VISUAL" href="#visual">
+			<h2>Visual</h2>
+		</a>
+		<h4>The <a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a> index contains art, visual design and photography.</h4>
+		<a data-goto="TOOLS" href="#tools">
+			<h2>Tools</h2>
+		</a>
+		<h4>The <a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a> index contains tools to create games and personal tools.</h4>
+		<a data-goto="AUDIO" href="#audio">
+			<h2>Audio</h2>
+		</a>
+		<h4>The <a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a> index contains music &amp; audio projects and references.</h4>
+		<a data-goto="LIFE" href="#life">
+			<h2>Life</h2>
+		</a>
+		<h4>The <a href="life" data-goto="life" target="_self" class="local  ">Life</a> index contains experiences, like travel and change.</h4>
+		<a data-goto="WORDS" href="#words">
+			<h2>Words</h2>
+		</a>
+		<h4>The <a href="words" data-goto="words" target="_self" class="local  ">Words</a> index contains writing on <a href="code" data-goto="code" target="_self" class="local  ">Code</a>, <a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a> and Thoughts.</h4>
+	</ul>
+	<p class=""><a href="about" data-goto="about" target="_self" class="local  ">About this endpoint</a></p>
+	<hr class="line">
+	<p class="">recent</p>
+	<ul class="tidy col3">
+		<li><a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a></li>
+		<li><a href="augment" data-goto="augment" target="_self" class="local  ">Augment</a></li>
+		<li><a href="artwork+3d" data-goto="artwork+3d" target="_self" class="local  ">Artwork 3d</a></li>
+		<li><a href="scratch" data-goto="scratch" target="_self" class="local  ">Scratch</a></li>
+		<li><a href="kinesea" data-goto="kinesea" target="_self" class="local  ">Kinesea</a></li>
+		<li><a href="horaire" data-goto="horaire" target="_self" class="local  ">Horaire</a></li>
+		<li><a href="luxe" data-goto="luxe" target="_self" class="local  ">Luxe</a></li>
+		<li><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li><a href="artwork" data-goto="artwork" target="_self" class="local  ">Artwork</a></li>
+		<li><a href="operator+overload+ost" data-goto="operator+overload+ost" target="_self" class="local  ">Operator Overload Ost</a></li>
+		<li><a href="oscean" data-goto="oscean" target="_self" class="local  ">Oscean</a></li>
+		<li><a href="meandery" data-goto="meandery" target="_self" class="local  ">Meandery</a></li>
+		<li><a href="canada" data-goto="canada" target="_self" class="local  ">Canada</a></li>
+		<li><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li><a href="errent" data-goto="errent" target="_self" class="local  ">Errent</a></li>
+		<li><a href="moments" data-goto="moments" target="_self" class="local  ">Moments</a></li>
+	</ul>
+</div>
+<div id="journal" class="">
+<div class="entry log event">
+	<svg data-goto="LIFE" class="icon">
+		<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+	</svg>
+	<div class="head">
+		<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="19A00">19A00</span></div>
+		<div class="bref">Snow Initialization</div>
+	</div>
+</div>
+<div class="entry log event">
+	<svg data-goto="LIFE" class="icon">
+		<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+	</svg>
+	<div class="head">
+		<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="18O00">18O00</span></div>
+		<div class="bref">Moved to Vancouver</div>
+	</div>
+	<img src="media/diary/6.jpg" data-goto="Life">
+</div>
+<div class="entry log event">
+	<svg data-goto="GAMES" class="icon">
+		<path transform="scale(0.15) translate(20,20)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+	</svg>
+	<div class="head">
+		<div class="details"><a href="games" data-goto="games" target="_self" class="local topic ">Games</a>  <span class="time" data-goto="18B10">18B10</span></div>
+		<div class="bref">Celeste Release</div>
+	</div>
+	<img src="media/diary/209.jpg" data-goto="Games">
+</div>
+<div class="entry log event">
+<svg data-goto="GAMES" class="icon">
+	<path transform="scale(0.15) translate(20,20)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+</svg>
+<div class="head">
+<div class="details">
+<a href="games" data-goto="games" target="_self" class="local topic ">Games</a>  <span cla
+<div id="main" class="">
+	<ul class="tidy col3">
+		<a data-goto="GAMES" href="#games">
+			<h2>Games</h2>
+		</a>
+		<h4>The <a href="games" data-goto="games" target="_self" class="local  ">Games</a> index contains past &amp; present games I've worked on.</h4>
+		<a data-goto="VISUAL" href="#visual">
+			<h2>Visual</h2>
+		</a>
+		<h4>The <a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a> index contains art, visual design and photography.</h4>
+		<a data-goto="TOOLS" href="#tools">
+			<h2>Tools</h2>
+		</a>
+		<h4>The <a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a> index contains tools to create games and personal tools.</h4>
+		<a data-goto="AUDIO" href="#audio">
+			<h2>Audio</h2>
+		</a>
+		<h4>The <a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a> index contains music &amp; audio projects and references.</h4>
+		<a data-goto="LIFE" href="#life">
+			<h2>Life</h2>
+		</a>
+		<h4>The <a href="life" data-goto="life" target="_self" class="local  ">Life</a> index contains experiences, like travel and change.</h4>
+		<a data-goto="WORDS" href="#words">
+			<h2>Words</h2>
+		</a>
+		<h4>The <a href="words" data-goto="words" target="_self" class="local  ">Words</a> index contains writing on <a href="code" data-goto="code" target="_self" class="local  ">Code</a>, <a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a> and Thoughts.</h4>
+	</ul>
+	<p class=""><a href="about" data-goto="about" target="_self" class="local  ">About this endpoint</a></p>
+	<hr class="line">
+	<p class="">recent</p>
+	<ul class="tidy col3">
+		<li><a href="fiction" data-goto="fiction" target="_self" class="local  ">Fiction</a></li>
+		<li><a href="augment" data-goto="augment" target="_self" class="local  ">Augment</a></li>
+		<li><a href="artwork+3d" data-goto="artwork+3d" target="_self" class="local  ">Artwork 3d</a></li>
+		<li><a href="scratch" data-goto="scratch" target="_self" class="local  ">Scratch</a></li>
+		<li><a href="kinesea" data-goto="kinesea" target="_self" class="local  ">Kinesea</a></li>
+		<li><a href="horaire" data-goto="horaire" target="_self" class="local  ">Horaire</a></li>
+		<li><a href="luxe" data-goto="luxe" target="_self" class="local  ">Luxe</a></li>
+		<li><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li><a href="artwork" data-goto="artwork" target="_self" class="local  ">Artwork</a></li>
+		<li><a href="operator+overload+ost" data-goto="operator+overload+ost" target="_self" class="local  ">Operator Overload Ost</a></li>
+		<li><a href="oscean" data-goto="oscean" target="_self" class="local  ">Oscean</a></li>
+		<li><a href="meandery" data-goto="meandery" target="_self" class="local  ">Meandery</a></li>
+		<li><a href="canada" data-goto="canada" target="_self" class="local  ">Canada</a></li>
+		<li><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li><a href="errent" data-goto="errent" target="_self" class="local  ">Errent</a></li>
+		<li><a href="moments" data-goto="moments" target="_self" class="local  ">Moments</a></li>
+	</ul>
+</div>
+<div id="tracker" class="">
+	<p>There are no issues to the <a href="home" data-goto="home" target="_self" class="local  ">Home</a> project.</p>
+</div>
+<div id="calendar" class="">
+	<svg class="viz no_status">
+		<text x="2" y="-15" style="text-anchor:start">7 Years Ago</text>
+		<text x="730" y="-15" style="text-anchor:end">1 Years Ago</text>
+		<rect class="audio" x="0" y="115" width="13" height="13" rx="2" ry="2" title="17O11"></rect>
+		<text x="28" y="125" style="text-anchor:start">Audio 0.0%</text>
+		<rect class="visual" x="112" y="115" width="13" height="13" rx="2" ry="2" title="17O11"></rect>
+		<text x="140" y="125" style="text-anchor:start">Visual 54.5%</text>
+		<rect class="research" x="224" y="115" width="13" height="13" rx="2" ry="2" title="17O11"></rect>
+		<text x="252" y="125" style="text-anchor:start">Research 45.5%</text>
+		<text x="725" y="125" style="text-anchor:end">33 Hours</text>
+		<rect class="audio" x="0" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="0" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="0" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="14" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="14" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="14" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="28" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="28" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="28" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="42" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="42" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="42" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="56" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="56" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="56" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="70" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="70" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="70" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="84" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="84" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="84" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="98" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="98" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="98" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="112" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="112" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="112" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="126" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="126" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="126" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="140" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="140" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="140" y="82" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="audio" x="154" y="91" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="visual" x="154" y="86.5" width="13" height="4" rx="2" ry="2"></rect>
+		<rect class="research" x="154" y="82" width="13" height="4" rx="2" ry="2"></rect>
+	</svg>
+	<ul class="tidy " style="padding-top:30px;">
+		<li class="head">2019</li>
+		<li style="">
+			<a href="life" data-goto="life" target="_self" class="local  ">Snow Initialization</a> <span title="19A00">19A00</span>
+		</li>
+		<li class="head">2018</li>
+		<li style="">
+			<a href="life" data-goto="life" target="_self" class="local  ">Moved to Vancouver</a> <span title="18O00">18O00</span>
+		</li>
+		<li style="">
+			<a href="games" data-goto="games" target="_self" class="local  ">Celeste Release</a> <span title="18B10">18B10</span>
+		</li>
+		<li class="head">2017</li>
+		<li style="">
+			<a href="games" data-goto="games" target="_self" class="local  ">Sky Rogue Release</a> <span title="17Q11">17Q11</span>
+		</li>
+		<li class="head">2016</li>
+		<li style="">
+			<a href="games" data-goto="games" target="_self" class="local  ">Westport Release</a> <span title="16B06">16B06</span>
+		</li>
+		<li class="head">2015</li>
+		<li style="">
+			<a href="games" data-goto="games" target="_self" class="local  ">Threes Web Release</a> <span title="15Y14">15Y14</span>
+		</li>
+		<li class="head">2013</li>
+		<li style="">
+			<a href="life" data-goto="life" target="_self" class="local  ">Moved to Newfoundland</a> <span title="13E00">13E00</span>
+		</li>
+	</ul>
+</div>
+<div id="journal" class="">
+	<div class="entry log event">
+		<svg data-goto="LIFE" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="19A00">19A00</span></div>
+			<div class="bref">Snow Initialization</div>
+		</div>
+	</div>
+	<div class="entry log event">
+		<svg data-goto="LIFE" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="18O00">18O00</span></div>
+			<div class="bref">Moved to Vancouver</div>
+		</div>
+		<img src="media/diary/6.jpg" data-goto="Life">
+	</div>
+	<div class="entry log event">
+		<svg data-goto="GAMES" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="games" data-goto="games" target="_self" class="local topic ">Games</a>  <span class="time" data-goto="18B10">18B10</span></div>
+			<div class="bref">Celeste Release</div>
+		</div>
+		<img src="media/diary/209.jpg" data-goto="Games">
+	</div>
+	<div class="entry log event">
+		<svg data-goto="GAMES" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="games" data-goto="games" target="_self" class="local topic ">Games</a>  <span class="time" data-goto="17Q11">17Q11</span></div>
+			<div class="bref">Sky Rogue Release</div>
+		</div>
+		<img src="media/diary/200.jpg" data-goto="Games">
+	</div>
+	<div class="entry log event">
+		<svg data-goto="GAMES" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="games" data-goto="games" target="_self" class="local topic ">Games</a>  <span class="time" data-goto="16B06">16B06</span></div>
+			<div class="bref">Westport Release</div>
+		</div>
+		<img src="media/diary/204.jpg" data-goto="Games">
+	</div>
+	<div class="entry log event">
+		<svg data-goto="GAMES" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M75,210 L75,210 L225,210 M135.5,55 L135.5,55 L60.5,185 M239.5,185 L239.5,185 L164.5,55"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="games" data-goto="games" target="_self" class="local topic ">Games</a>  <span class="time" data-goto="15Y14">15Y14</span></div>
+			<div class="bref">Threes Web Release</div>
+		</div>
+		<img src="media/diary/203.jpg" data-goto="Games">
+	</div>
+	<div class="entry log event">
+		<svg data-goto="LIFE" class="icon">
+			<path transform="scale(0.15) translate(20,20)" d="M150,60 A90,90 0 0,1 240,150 A-90,90 0 0,1 150,240 A-90,-90 0 0,1 60,150 A90,-90 0 0,1 150,60"></path>
+		</svg>
+		<div class="head">
+			<div class="details"><a href="life" data-goto="life" target="_self" class="local topic ">Life</a>  <span class="time" data-goto="13E00">13E00</span></div>
+			<div class="bref">Moved to Newfoundland</div>
+		</div>
+		<img src="media/diary/3.jpg" data-goto="Life">
+	</div>
+</div>
+<div id="sidebar" class="">
+	<h1>access &nbsp;endpoint: <br><a href="about" data-goto="about" target="_self" class="local  ">&nbsp;&nbsp;_discovery</a><br></h1>
+	<ul class="directory">
+		<li class="parent"><a href="home" data-goto="home" target="_self" class="local  ">Home</a></li>
+		<li class="children "><a href="games" data-goto="games" target="_self" class="local  ">Games</a></li>
+		<li class="children "><a href="visual" data-goto="visual" target="_self" class="local  ">Visual</a></li>
+		<li class="children "><a href="tools" data-goto="tools" target="_self" class="local  ">Tools</a></li>
+		<li class="children "><a href="audio" data-goto="audio" target="_self" class="local  ">Audio</a></li>
+		<li class="children "><a href="life" data-goto="life" target="_self" class="local  ">Life</a></li>
+		<li class="children "><a href="words" data-goto="words" target="_self" class="local  ">Words</a></li>
+	</ul>
+</div>
+<div id="navi" class="empty"></div>
+<div id="footer">
+	<div id="credits">
+		<a target="_blank" href="https://twitter.com/___discovery" class="icon twitter external"></a>
+		<a target="_blank" href="https://github.com/underscorediscovery" class="icon github external"></a>      
+		<a target="_blank" href="https://merveilles.town/@_discovery" class="icon merveilles external"></a>
+		<a target="_blank" href="http://webring.xxiivv.com/#random" class="icon rotonde"></a>
+		<a data-goto="oscean" href="#oscean">An Oscean Endpoint</a> © 20K07
+		<center>988:966</center>
+	</div>
+</div>
+<div id="credits">
+	<a target="_blank" href="https://twitter.com/___discovery" class="icon twitter external"></a>
+	<a target="_blank" href="https://github.com/underscorediscovery" class="icon github external"></a>      
+	<a target="_blank" href="https://merveilles.town/@_discovery" class="icon merveilles external"></a>
+	<a target="_blank" href="http://webring.xxiivv.com/#random" class="icon rotonde"></a>
+	<a data-goto="oscean" href="#oscean">An Oscean Endpoint</a> © 20K07
+	<center>988:966</center>
+</div>
+
+</body>
+</html>
