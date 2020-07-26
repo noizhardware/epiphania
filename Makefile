@@ -1,13 +1,15 @@
 SRC = epiphania.c
 DEST = epiphania.exe
-includePath = R:/c/s/i
+DESTnix = epiphania
+includePath = R:/s/c/i
+includePathNix = R:/s/c/i
 
 all: $(SRC)
 	gcc -std=c90 -g0 -Wall -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
 
 debug:
-	gcc -std=c90 -g -static-libasan -fsanitize=address -Wall -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
-	./$(DEST)
+	gcc -std=c90 -g -static-libasan -fsanitize=address -Wall -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
+	./$(DESTnix)
 
 clean:
 	rm $(DEST)
@@ -15,6 +17,9 @@ clean:
 
 go:
 	./$(DEST)
+	
+gon:
+	./$(DESTnix)
 
 edit:
 	nano $(SRC)
@@ -30,5 +35,6 @@ ht:
 .PHONY: debug
 .PHONY: clean
 .PHONY: go
+.PHONY: gon
 .PHONY: edit
 .PHONY: emk
