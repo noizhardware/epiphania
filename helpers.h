@@ -156,10 +156,11 @@ static __inline__ char* htmlList(char** list){
      char* output = malloc(6); /* length of <ul>\n + terminating 0 */
      unsigned int i;
      strcpy(output, "<ul>\n");
+     /*
      for(i = 0; i < ARRAYELEMS(list); i++){
           output = appendString(output, "\t<li>");
           output = appendString(output, list[i]);
           output = appendString(output, "</li>\n");}
-     output = appendString(output, "</ul>\n");
+     output = appendString(output, "</ul>\n");*/
      return output;}
 /* HTML END */
