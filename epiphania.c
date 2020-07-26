@@ -6,6 +6,7 @@
 /*#include "html.h"*/
 
 #include "helpers.h" /* temporary */
+#include "baoutil.h"
 
 /* C90 compliant <3 */
 
@@ -47,11 +48,11 @@ script blocks (js)
 
       gtag('config', 'UA-132920421-1');
     </script>
-    
+
 * sitemap generator: checka ogni file i link locali che ha, e li lista come suoi children, ricorsivamente
 
 */
-     
+
 /*
 head10
 dark / light (theme)
@@ -82,7 +83,7 @@ int main (){
                "list item two",
                "list item three",};
 /* var defs END */
-     
+
      theme = DARK;
      pageTitle = "test";
 
@@ -96,18 +97,18 @@ int main (){
      fileAppendFile("render/lxmenu_test.html", fileName);
      fileAppendFile("render/head40.html", fileName);
      /*fileAppendFile("render/head40-topimage.html", fileName);*/
-     
+
      fileAppendString(fileName, "<h1>PORCODIO</h1>\n"); /* MAIN */
-     
+
      /* full test (MAIN)*/
           /*toHtml = appendString(toHtml, htmlParagraph(terminateStringOnChar(epiSource, '\n', true, false), true), true);*/ /* takes first line */
-          
+
           /* TODO: creare dei #define per sti blocchetti (da mettere direttamente in helpers.h >> baofiles.h)*/
           html = htmlHeader("Header ONE", 1);
                fileAppendString(fileName, html);
                free(html);
           html = htmlHeader("Header TWO", 2);
-               fileAppendString(fileName, html);     
+               fileAppendString(fileName, html);
                free(html);
           html = htmlHeader("Header THREE", 3);
                fileAppendString(fileName, html);
@@ -121,11 +122,11 @@ int main (){
           html = htmlHeader("Header SIX", 6);
                fileAppendString(fileName, html);
                free(html);
-               
+
           html = htmlParagraph("plain paragraph");
                fileAppendString(fileName, html);
                free(html);
-     
+
           html2 = htmlBold("bold text");
           html = htmlParagraph(html2);
                fileAppendString(fileName, html);
@@ -143,7 +144,7 @@ int main (){
                free(html);
                free(html2);
                free(html3);
-               
+
           html = htmlParagraph("line break below:");
                fileAppendString(fileName, html);
                free(html);
@@ -156,7 +157,7 @@ int main (){
                html = htmlHr();
                     fileAppendString(fileName, html);
                     free(html);
-                    
+
           html2 = htmlLinkLoc("localsample", "This is a local link");
           html = htmlParagraph(html2);
                fileAppendString(fileName, html);
@@ -173,11 +174,11 @@ int main (){
                fileAppendString(fileName, html);
                free(html);
                free(html2);
-               
-          html = htmlList(list);
+
+          html = htmlList(list, ARRAYELEMS(list));
                fileAppendString(fileName, html);
                free(html);
 
      fileAppendFile("render/foot10.html", fileName);
-     
+
 return 0;}
