@@ -2,10 +2,13 @@ SRC = epiphania.c
 DEST = epiphania.exe
 DESTnix = epiphania
 includePath = R:/s/c/i
-includePathNix = R:/s/c/i
+includePathNix = ~/s/cBao
 
 all: $(SRC)
 	gcc -std=c90 -g0 -Wall -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
+
+nix: $(SRC)
+	gcc -std=c90 -g0 -Wall -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
 
 debug:
 	gcc -std=c90 -g -static-libasan -fsanitize=address -Wall -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
@@ -17,7 +20,7 @@ clean:
 
 go:
 	./$(DEST)
-	
+
 gon:
 	./$(DESTnix)
 
@@ -37,4 +40,5 @@ ht:
 .PHONY: go
 .PHONY: gon
 .PHONY: edit
+.PHONY: nix
 .PHONY: emk
