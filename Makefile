@@ -5,7 +5,7 @@ includePath = R:/s/c/i
 includePathNix = ~/s/cBao
 
 all: $(SRC)
-	gcc -std=c90 -g0 -Wall -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
+	gcc -ansi -g0 -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
 
 nix: $(SRC)
 	gcc -std=c90 -g0 -Wall -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)

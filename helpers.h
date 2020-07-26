@@ -13,14 +13,14 @@ static __inline__ void fileReset(char* fileName){
 static __inline__ void fileOverwrite(char* fileName, char* string){
      FILE* out = fopen(fileName, "w"); /* using "w" to WRITE (overwrites the current file, if it exists, creates a new one if it doesn't) */
      if(fwrite(string , sizeof(char) , strlen(string) , out ) != strlen(string)){
-               printf("==file write error\n");
+               printf("==: file write error\n");
                exit(EXIT_FAILURE);}
      fclose(out);}
      
 static __inline__ void fileAppendString(char* fileName, char* string){
      FILE* out = fopen(fileName, "a"); /* using "a" to APPEND */
      if(fwrite(string , sizeof(char) , strlen(string) , out ) != strlen(string)){
-               printf("==file write error\n");
+               printf("==: file write error\n");
                exit(EXIT_FAILURE);}
      fclose(out);}
      
@@ -32,7 +32,7 @@ static __inline__ void fileAppendFile(char* source, char* dest){
      
      /* using getdelim with '\n' delimiter instead of getline */
      /*while ((read = getdelim(&line, &len, '\n', in)) != -1) {*/
-     while ((read = getline(&line, &len, in)) != -1) {
+     while ((int)(read = getline(&line, &len, in)) != -1) {
           fileAppendString(dest, line);}
           
     	free(line);
@@ -154,7 +154,7 @@ static __inline__ char* htmlLinkExt(char* linkAddress, char* linkText){
      
 static __inline__ char* htmlList(char** list){
      char* output = malloc(6); /* length of <ul>\n + terminating 0 */
-     int i;
+     unsigned int i;
      strcpy(output, "<ul>\n");
      for(i = 0; i < ARRAYELEMS(list); i++){
           output = appendString(output, "\t<li>");
