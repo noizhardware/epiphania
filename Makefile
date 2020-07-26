@@ -5,13 +5,13 @@ includePath = R:/s/c/i
 includePathNix = ~/s/cBao
 
 all: $(SRC)
-	gcc -ansi -g0 -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
+	gcc -ansi -g0 -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DEST) $(SRC) -I $(includePath) -Wno-long-long
 
 nix: $(SRC)
 	gcc -ansi -g0 -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
 
 debug:
-	gcc -ansi -g -static-libasan -fsanitize=address -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
+	gcc -ansi -g -static-libasan -fsanitize=address -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix) -Wno-long-long
 	./$(DESTnix)
 
 clean:

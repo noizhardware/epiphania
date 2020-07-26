@@ -8,6 +8,9 @@
 #include "helpers.h" /* temporary */
 #include "baoutil.h"
 
+#include "baotime.h"
+
+
 /* C90 compliant <3 */
 
 /***
@@ -83,6 +86,8 @@ int main (){
                "list item two",
                "list item three",};
 /* var defs END */
+
+     startTimer();
 
      theme = DARK;
      pageTitle = "test";
@@ -180,5 +185,8 @@ int main (){
                free(html);
 
      fileAppendFile("render/foot10.html", fileName);
+     
+     stopTimer();
+     printf("finished in: %d.%dsec\n", elapsed().tv_sec, elapsed().tv_usec);
 
 return 0;}
