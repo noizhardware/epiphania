@@ -8,10 +8,10 @@ all: $(SRC)
 	gcc -ansi -g0 -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DEST) $(SRC) -I $(includePath)
 
 nix: $(SRC)
-	gcc -std=c90 -g0 -Wall -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
+	gcc -ansi -g0 -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
 
 debug:
-	gcc -std=c90 -g -static-libasan -fsanitize=address -Wall -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
+	gcc -ansi -g -static-libasan -fsanitize=address -Wall -Wextra -Wshadow -Wvla -pedantic-errors -o $(DESTnix) $(SRC) -I $(includePathNix)
 	./$(DESTnix)
 
 clean:
