@@ -185,8 +185,8 @@ int main (){
                free(html);
 
      fileAppendFile("render/foot10.html", fileName);
-     
+
      stopTimer();
-     printf("finished in: %d.%dsec\n", elapsed().tv_sec, elapsed().tv_usec);
+     printf("finished in: %ld.%ldsec\n", elapsed().tv_sec, elapsed().tv_usec);
 
 return 0;}
