@@ -7,6 +7,7 @@
 
 #include "helpers.h" /* temporary */
 #include "baoutil.h"
+#include "baofiles.h"
 
 #include "baotime.h"
 
@@ -72,6 +73,9 @@ foot10
 #define LIGHT "light"
 #define BLACK "black"
 
+#define MAX_LINE_SIZE 256
+#define MAX_LINES_IN_FILE 256
+
 int main (){
 /* var defs */
      /*char* head10 = "";*/
@@ -85,6 +89,8 @@ int main (){
                "list item one",
                "list item two",
                "list item three",};
+     char** lines;
+     int i = 0;
 /* var defs END */
 
      startTimer();
@@ -185,7 +191,23 @@ int main (){
                free(html);
 
      fileAppendFile("render/foot10.html", fileName);
+     
+     /* file reading */
+     lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);
 
+     
+     while(lines[i][0]!=EOF){
+          lines[i] = terminateStringOnString(lines[i], "--", true);
+          printf("%s\n", lines[i]);
+          i++;}
+     
+     /*for(i=0;i<100;i++){     
+          lines[i] = terminateStringOnString(lines[i], "--", true);
+          printf("%s\n", lines[i]);
+     }*/
+     
+     freeStringTable(lines);
+     
      stopTimer();
      printf("finished in: %ld.%ldsec\n", elapsed().tv_sec, elapsed().tv_usec);
 
