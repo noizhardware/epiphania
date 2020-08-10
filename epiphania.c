@@ -83,6 +83,7 @@ int main (){
                "list item two",
                "list item three",};
      char** lines;
+     char* line;
      int i = 0;
 /* var defs END */
 
@@ -184,24 +185,26 @@ int main (){
                free(html);
 
      fileAppendFile("render/foot10.html", fileName);
-     
+
      /* file reading */
      /*lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);*/
      lines = getArray("matrixmixers");
 
-     
+
      while(lines[i][0]!=EOF){
-          lines[i] = terminateStringOnString(lines[i], "--", true);
+          line = terminateStringOnString(lines[i], "--", true);
+          sprintf(lines[i], "%s", line);
           printf("%s\n", lines[i]);
+          free(line);
           i++;}
-     
-     /*for(i=0;i<100;i++){     
+
+     /*for(i=0;i<100;i++){
           lines[i] = terminateStringOnString(lines[i], "--", true);
           printf("%s\n", lines[i]);
      }*/
-     
+
      freeStringTable(lines);
-     
+
      stopTimer();
      printf("finished in: %ld.%ldsec\n", elapsed().tv_sec, elapsed().tv_usec);
 
