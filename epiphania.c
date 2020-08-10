@@ -69,13 +69,6 @@ main (page)
 foot10
 */
 
-#define DARK "dark"
-#define LIGHT "light"
-#define BLACK "black"
-
-#define MAX_LINE_SIZE 256
-#define MAX_LINES_IN_FILE 256
-
 int main (){
 /* var defs */
      /*char* head10 = "";*/
@@ -193,7 +186,8 @@ int main (){
      fileAppendFile("render/foot10.html", fileName);
      
      /* file reading */
-     lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);
+     /*lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);*/
+     lines = getArray("matrixmixers");
 
      
      while(lines[i][0]!=EOF){

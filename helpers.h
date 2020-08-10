@@ -1,3 +1,30 @@
+#define DARK "dark"
+#define LIGHT "light"
+#define BLACK "black"
+
+#define MAX_LINE_SIZE 256
+#define MAX_LINES_IN_FILE 256
+
+
+/****** EPIPHANIA *******/
+#include"baostring.h"
+#include"baofiles.h"
+
+static __inline__ char** getArray(char* filename);
+
+/* takes a filename and spits out an array of lines */
+static __inline__ char** getArray(char* filename){
+     char** out;
+     char* fn;
+     fn = calloc(1, 10);
+     memcpy(fn, "database/", 9);
+     fn=appendString(fn, filename);
+     fn=appendString(fn, ".md");
+     out = fileToLines(fn, MAX_LINE_SIZE, MAX_LINES_IN_FILE);
+     free(fn);
+     return out;}
+/****** EPIPHANIA end.*******/
+
 /* files */
 static __inline__ void fileReset(char* fileName);
 static __inline__ void fileOverwrite(char* fileName, char* string);
@@ -5,6 +32,7 @@ static __inline__ void fileAppendString(char* fileName, char* string);
 static __inline__ void fileAppendFile(char* source, char* dest);
 static __inline__ char* fileToString(char* file);
 
+/* empties the file */
 static __inline__ void fileReset(char* fileName){
      FILE* out = fopen(fileName, "w");
      fwrite("" , sizeof(char) , strlen("") , out );
@@ -83,6 +111,18 @@ static __inline__ char* fileToString(char* fileName){
 /* HTML */
 #include "baostring.h"
 /*#include "baoutil.h"*/ /* for ARRAYELEMS */
+
+static __inline__ char* htmlHeader(char* headerText, unsigned char headerNum);
+static __inline__ char* htmlParagraph(char* paragraphText);
+static __inline__ char* htmlBold(char* boldText);
+static __inline__ char* htmlItalic(char* italicText);
+static __inline__ char* htmlCenter(char* centeredText);
+static __inline__ char* htmlBr();
+static __inline__ char* htmlHr();
+static __inline__ char* htmlLinkLoc(char* linkAddress, char* linkText);
+static __inline__ char* htmlLinkExt(char* linkAddress, char* linkText);
+static __inline__ char* htmlList(char** list, size_t size);
+
 static __inline__ char* htmlHeader(char* headerText, unsigned char headerNum){ /* headernum must be [1..9] */
      char* output = malloc(3); /* length of <h + terminating 0 */
      strcpy(output, "<h");
