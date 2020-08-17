@@ -191,7 +191,7 @@ int main (){
 
      /* file reading */
      /*lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);*/
-     epiName = "matrixmixers";
+     epiName = "features";
      lines = getArray(epiName);
 
      /* delete all comments */
@@ -253,6 +253,11 @@ int main (){
             else if(strEqual(line, "hide")){
               epiFiles[0].status = HIDE;}
             printf("==status: %d\n", epiFiles[0].status);
+            free(line);}
+          else if(startsWith(lines[i], "img ")){
+            line = removeSubstr(lines[i], "img ");
+            epiFiles[0].image = line;
+            printf("==image: %s\n", epiFiles[0].image);
             free(line);}
           else if(startsWith(lines[i], TAG_GLYPH)){
             line = removeSubstr(lines[i], TAG_GLYPH);

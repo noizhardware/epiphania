@@ -9,6 +9,7 @@
 
 #define COMMENT_GLYPH "--"
 #define TAG_GLYPH ",,"
+#define CONTENT_GYPH "***"
 
 /****** EPIPHANIA *******/
 #include"baostring.h"
@@ -233,7 +234,7 @@ typedef enum{
   HIDE
 } epiStatus;
 
-#define MAX_TAG_LENGTH 20
+/*#define MAX_TAG_LENGTH 20*/
 #define MAX_TAGS 20
 
 typedef struct epiFile{
@@ -244,6 +245,7 @@ typedef struct epiFile{
   epiTheme theme;
   char* description;
   epiStatus status;
+  char* image;
   char* tags[MAX_TAGS];
   /*char tags[MAX_TAGS][MAX_TAG_LENGTH];*/
 } epiFile;

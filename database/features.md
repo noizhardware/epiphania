@@ -1,3 +1,4 @@
+title Matrix Mixer features
 parent matrixmixers --will point to matrixmixers.html
 type leaf -- la pagina è alla fine dell'albero, non ha children
 theme light

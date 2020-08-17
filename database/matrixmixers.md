@@ -1,10 +1,12 @@
-title matrix mixers -- "nHw - " viene aggiunto automaticamente alla htmltag title
+title matrix mixers -- "nHw - " is prepend to the "title" html tag
 parent home --parent, in this case it's home, the root of the site
 theme dark
 type index --vuoldire che dopo il contenuto che viene descritto qui, verrà messo un elenco di preview di tutti i children
 desc Matrix Mixers
-status active --status: se è active tutto normale, se "upcoming" la pagina non verrà creata, ma comparirà nell'index, grayed-out o strikethru, senza link
+status active --status: active:all normal, upcoming:the page will be created, but won't appear in the sitemap(grayed-out or strikethru, without link)
 
+***
+ciao porcodio!
 [[features]]
 
 ,,sitepub
