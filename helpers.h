@@ -1,10 +1,14 @@
+/*
 #define DARK "dark"
 #define LIGHT "light"
 #define BLACK "black"
+*/
 
 #define MAX_LINE_SIZE 256
 #define MAX_LINES_IN_FILE 256
 
+#define COMMENT_GLYPH "--"
+#define TAG_GLYPH ",,"
 
 /****** EPIPHANIA *******/
 #include"baostring.h"
@@ -206,3 +210,43 @@ static __inline__ char* htmlList(char** list, size_t size){
 
      return output;}
 /* HTML END */
+
+/* epiphania-specific */
+
+typedef enum{
+  NORMAL,
+  INDEX,
+  LEAF
+} epiType;
+
+typedef enum{
+  LIGHT,
+  DARK,
+  BLACK
+} epiTheme;
+
+
+typedef enum{
+  ACTIVE,
+  UPCOMING,
+  UNLISTED,
+  HIDE
+} epiStatus;
+
+#define MAX_TAG_LENGTH 20
+#define MAX_TAGS 20
+
+typedef struct epiFile{
+  char* name;
+  char* title;
+  char* parent;
+  epiType type;
+  epiTheme theme;
+  char* description;
+  epiStatus status;
+  char* tags[MAX_TAGS];
+  /*char tags[MAX_TAGS][MAX_TAG_LENGTH];*/
+} epiFile;
+
+
+/* epiphania-specific END*/

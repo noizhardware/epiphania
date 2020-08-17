@@ -85,11 +85,14 @@ int main (){
      char** lines;
      char* line;
      int i = 0;
+     char* epiName;
+     epiFile epiFiles[100]; /* max files */
+     unsigned int tagIndex = 0;
 /* var defs END */
 
      startTimer();
 
-     theme = DARK;
+     theme = "dark";
      pageTitle = "test";
 
      fileReset(fileName);
@@ -188,20 +191,77 @@ int main (){
 
      /* file reading */
      /*lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);*/
-     lines = getArray("matrixmixers");
+     epiName = "matrixmixers";
+     lines = getArray(epiName);
 
-
+     /* delete all comments */
      while(lines[i][0]!=EOF){
-          line = terminateStringOnString(lines[i], "--", true);
+          line = terminateStringOnString(lines[i], COMMENT_GLYPH, true);
           sprintf(lines[i], "%s", line);
           printf("%s\n", lines[i]);
           free(line);
           i++;}
 
-     /*for(i=0;i<100;i++){
-          lines[i] = terminateStringOnString(lines[i], "--", true);
-          printf("%s\n", lines[i]);
-     }*/
+          epiFiles[0].name = epiName;
+          printf("==filename: %s\n", epiFiles[0].name);
+
+          i=0;
+      while(lines[i][0]!=EOF){
+          if(startsWith(lines[i], "title ")){
+            line = removeSubstr(lines[i], "title ");
+            epiFiles[0].title = line;
+            printf("==title: %s\n", epiFiles[0].title);
+            free(line);}
+          else if(startsWith(lines[i], "parent ")){
+            line = removeSubstr(lines[i], "parent ");
+            epiFiles[0].parent = line;
+            printf("==parent: %s\n", epiFiles[0].parent);
+            free(line);}
+          else if(startsWith(lines[i], "type ")){
+            line = removeSubstr(lines[i], "type ");
+            if(strEqual(line, "normal")){
+              epiFiles[0].type = NORMAL;}
+            else if(strEqual(line, "index")){
+              epiFiles[0].type = INDEX;}
+            else if(strEqual(line, "leaf")){
+              epiFiles[0].type = LEAF;}
+            printf("==type: %d\n", epiFiles[0].type);
+            free(line);}
+          else if(startsWith(lines[i], "theme ")){
+            line = removeSubstr(lines[i], "theme ");
+            if(strEqual(line, "light")){
+              epiFiles[0].type = LIGHT;}
+            else if(strEqual(line, "dark")){
+              epiFiles[0].type = DARK;}
+            else if(strEqual(line, "black")){
+              epiFiles[0].type = BLACK;}
+            printf("==theme: %d\n", epiFiles[0].type);
+            free(line);}
+          else if(startsWith(lines[i], "desc ")){
+            line = removeSubstr(lines[i], "desc ");
+            epiFiles[0].description = line;
+            printf("==description: %s\n", epiFiles[0].description);
+            free(line);}
+          else if(startsWith(lines[i], "status ")){
+            line = removeSubstr(lines[i], "status ");
+            if(strEqual(line, "active")){
+              epiFiles[0].status = ACTIVE;}
+            else if(strEqual(line, "upcoming")){
+              epiFiles[0].status = UPCOMING;}
+            else if(strEqual(line, "unlisted")){
+              epiFiles[0].status = UNLISTED;}
+            else if(strEqual(line, "hide")){
+              epiFiles[0].status = HIDE;}
+            printf("==status: %d\n", epiFiles[0].status);
+            free(line);}
+          else if(startsWith(lines[i], TAG_GLYPH)){
+            line = removeSubstr(lines[i], TAG_GLYPH);
+            epiFiles[0].tags[tagIndex] = line;
+            printf("==tag: %s\n", epiFiles[0].tags[tagIndex]);
+            tagIndex++;
+            free(line);}
+           i++;}
+
 
      freeStringTable(lines);
 
