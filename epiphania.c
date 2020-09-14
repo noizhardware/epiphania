@@ -12,16 +12,17 @@
 #include "baotime.h"
 
 
-/* C90 compliant <3 */
+/* ANSI C compliant <3 */
 
 /***
 code documentation block
 ***/
 
 /*
-images!
-
-script blocks (js)
+TODO:
+     - images!
+     - script blocks (js)
+     - "linked from" : list of pages that link to the present page, at the end of the present page
 
 <head>
   <meta charset="utf-8">
