@@ -10,7 +10,8 @@ ciao porcodio!
 [[features]]
 
 ,,sitepub
-,,audio
+,,sound
+,,hardware
 ,,electronics
 ,,mixer
 ,,matrixmixer

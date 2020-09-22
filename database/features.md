@@ -9,7 +9,8 @@ img stocazzo.jpg ----è l'immagine che verrà displayata nel parent // oppure il
 [[matrixmixers]]
 
 ,,sitepub
-,,audio
+,,sound
 ,,electronics
 ,,mixer
 ,,matrixmixer
+,,hardware
