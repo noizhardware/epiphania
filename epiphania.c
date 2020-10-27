@@ -56,6 +56,8 @@ TODO:
 
 * sitemap generator: checka ogni file i link locali che ha, e li lista come suoi children, ricorsivamente
 
+* https://www.foo.software/lighthouse
+
 */
 
 /*
