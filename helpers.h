@@ -1,15 +1,12 @@
-/*
-#define DARK "dark"
-#define LIGHT "light"
-#define BLACK "black"
-*/
 
 #define MAX_LINE_SIZE 256
 #define MAX_LINES_IN_FILE 256
 
+#define MAX_FILES 100 /* maximum number of file to be processed */
+
 #define COMMENT_GLYPH "--"
 #define TAG_GLYPH ",,"
-#define CONTENT_GYPH "***"
+#define CONTENT_GLYPH "***"
 
 /****** EPIPHANIA *******/
 #include"baostring.h"
@@ -46,14 +43,14 @@ static __inline__ void fileReset(char* fileName){
 static __inline__ void fileOverwrite(char* fileName, char* string){
      FILE* out = fopen(fileName, "w"); /* using "w" to WRITE (overwrites the current file, if it exists, creates a new one if it doesn't) */
      if(fwrite(string , sizeof(char) , strlen(string) , out ) != strlen(string)){
-               printf("==: file write error\n");
+               printf("::== file write error\n");
                exit(EXIT_FAILURE);}
      fclose(out);}
 
 static __inline__ void fileAppendString(char* fileName, char* string){
      FILE* out = fopen(fileName, "a"); /* using "a" to APPEND */
      if(fwrite(string , sizeof(char) , strlen(string) , out ) != strlen(string)){
-               printf("==: file write error\n");
+               printf("::== file write error\n");
                exit(EXIT_FAILURE);}
      fclose(out);}
 
@@ -215,12 +212,14 @@ static __inline__ char* htmlList(char** list, size_t size){
 /* epiphania-specific */
 
 typedef enum{
+  NOTYPE,
   NORMAL,
   INDEX,
   LEAF
 } epiType;
 
 typedef enum{
+  NOTHEME,
   LIGHT,
   DARK,
   BLACK
@@ -228,6 +227,7 @@ typedef enum{
 
 
 typedef enum{
+  NOSTATUS,
   ACTIVE,
   UPCOMING,
   UNLISTED,

@@ -9,6 +9,7 @@
 #include "baoutil.h"
 #include "baofiles.h"
 
+#define BAOTIME_LONGLONG_ENABLED
 #include "baotime.h"
 
 
@@ -20,6 +21,8 @@ code documentation block
 
 /*
 TODO:
+     - elimina leading and trailing spaces (possono rimanere dalla rimozione dei comments)
+     - get rid of all malloc/calloc
      - images!
      - script blocks (js)
      - "linked from" : list of pages that link to the present page, at the end of the present page
@@ -75,7 +78,7 @@ foot10
 int main (){
 /* var defs */
      /*char* head10 = "";*/
-     char* fileName = "testhtml.html";
+     char* fileOut = "testhtml.html";
      char* theme;
      char* pageTitle;
      char* html;
@@ -89,188 +92,170 @@ int main (){
      char* line;
      int i = 0;
      char* epiName;
-     epiFile epiFiles[100]; /* max files */
+     epiFile epiFiles[MAX_FILES];
      unsigned int tagIndex = 0;
 /* var defs END */
 
      startTimer();
+     
+     
+     /* HTML writing test */
 
      theme = "dark";
      pageTitle = "test";
 
-     fileReset(fileName);
-     fileAppendFile("render/head10.html", fileName);
-     fileAppendString(fileName, theme);
-     fileAppendFile("render/head20.html", fileName);
-     fileAppendString(fileName, pageTitle);
-     fileAppendFile("render/head30.html", fileName);
-     /*fileAppendFile("render/head30-topimage.html", fileName);*/
-     fileAppendFile("render/lxmenu_test.html", fileName);
-     fileAppendFile("render/head40.html", fileName);
-     /*fileAppendFile("render/head40-topimage.html", fileName);*/
+     fileReset(fileOut);
+     fileAppendFile("render/head10.html", fileOut);
+     fileAppendString(fileOut, theme);
+     fileAppendFile("render/head20.html", fileOut);
+     fileAppendString(fileOut, pageTitle);
+     fileAppendFile("render/head30.html", fileOut);
+     /*fileAppendFile("render/head30-topimage.html", fileOut);*/
+     fileAppendFile("render/lxmenu_test.html", fileOut);
+     fileAppendFile("render/head40.html", fileOut);
+     /*fileAppendFile("render/head40-topimage.html", fileOut);*/
 
-     fileAppendString(fileName, "<h1>PORCODIO</h1>\n"); /* MAIN */
-
-     /* full test (MAIN)*/
-          /*toHtml = appendString(toHtml, htmlParagraph(terminateStringOnChar(epiSource, '\n', true, false), true), true);*/ /* takes first line */
-
-          /* TODO: creare dei #define per sti blocchetti (da mettere direttamente in helpers.h >> baofiles.h)*/
-          html = htmlHeader("Header ONE", 1);
-               fileAppendString(fileName, html);
-               free(html);
-          html = htmlHeader("Header TWO", 2);
-               fileAppendString(fileName, html);
-               free(html);
-          html = htmlHeader("Header THREE", 3);
-               fileAppendString(fileName, html);
-               free(html);
-          html = htmlHeader("Header FOUR", 4);
-               fileAppendString(fileName, html);
-               free(html);
-          html = htmlHeader("Header FIVE", 5);
-               fileAppendString(fileName, html);
-               free(html);
-          html = htmlHeader("Header SIX", 6);
-               fileAppendString(fileName, html);
-               free(html);
+     fileAppendString(fileOut, "<h1>PORCODIO</h1>\n"); /* MAIN */
+     
+     #define HTML_HEADER(string, headerNum, file) html = htmlHeader(string, headerNum);fileAppendString(file, html);free(html);
+          HTML_HEADER ("Header ONE", 1, fileOut);
+          HTML_HEADER ("Header TWO", 2, fileOut);
+          HTML_HEADER ("Header THREE", 3, fileOut);
+          HTML_HEADER ("Header FOUR", 4, fileOut);
+          HTML_HEADER ("Header FIVE", 5, fileOut);
+          HTML_HEADER ("Header SIX", 6, fileOut);
 
           html = htmlParagraph("plain paragraph");
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
 
           html2 = htmlBold("bold text");
           html = htmlParagraph(html2);
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                free(html2);
           html2 = htmlItalic("italic text");
           html = htmlParagraph(html2);
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                free(html2);
           html3 = htmlItalic("italic and bold text");
           html2 = htmlBold(html3);
           html = htmlParagraph(html2);
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                free(html2);
                free(html3);
 
           html = htmlParagraph("line break below:");
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                html = htmlBr();
-                    fileAppendString(fileName, html);
+                    fileAppendString(fileOut, html);
                     free(html);
           html = htmlParagraph("horizontal ruler below:");
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                html = htmlHr();
-                    fileAppendString(fileName, html);
+                    fileAppendString(fileOut, html);
                     free(html);
 
           html2 = htmlLinkLoc("localsample", "This is a local link");
           html = htmlParagraph(html2);
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                free(html2);
           html2 = htmlLinkExt("http://www.example.com", "This is an external link");
           html = htmlParagraph(html2);
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                free(html2);
 
           html2 = htmlCenter("centered text");
           html = htmlParagraph(html2);
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
                free(html2);
 
           html = htmlList(list, ARRAYELEMS(list));
-               fileAppendString(fileName, html);
+               fileAppendString(fileOut, html);
                free(html);
 
-     fileAppendFile("render/foot10.html", fileName);
+     fileAppendFile("render/foot10.html", fileOut);
+     /* HTML writing test END. */
 
      /* file reading */
      /*lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);*/
      epiName = "features";
      lines = getArray(epiName);
 
+     printf("\n");
      /* delete all comments */
      while(lines[i][0]!=EOF){
-          line = terminateStringOnString(lines[i], COMMENT_GLYPH, true);
+          line = terminateStringOnString(lines[i], COMMENT_GLYPH, true); /* TODO: copiare eliminazione commenti da mass.h, li è fatta meglio */
           sprintf(lines[i], "%s", line);
-          printf("%s\n", lines[i]);
+          printf(">>%s\n", lines[i]);
           free(line);
           i++;}
+     printf("\n");
 
           epiFiles[0].name = epiName;
           printf("==filename: %s\n", epiFiles[0].name);
 
-          i=0;
-      while(lines[i][0]!=EOF){
+     i=0; /* now getting metadata from the file */
+     while(lines[i][0]!=EOF){
           if(startsWith(lines[i], "title ")){
-            line = removeSubstr(lines[i], "title ");
-            epiFiles[0].title = line;
-            printf("==title: %s\n", epiFiles[0].title);
-            free(line);}
+               epiFiles[0].title = lines[i]+6;
+               printf("==title: %s\n", epiFiles[0].title);}
           else if(startsWith(lines[i], "parent ")){
-            line = removeSubstr(lines[i], "parent ");
-            epiFiles[0].parent = line;
-            printf("==parent: %s\n", epiFiles[0].parent);
-            free(line);}
+               epiFiles[0].parent = lines[i]+7;
+               printf("==parent: %s\n", epiFiles[0].parent);}
           else if(startsWith(lines[i], "type ")){
-            line = removeSubstr(lines[i], "type ");
-            if(strEqual(line, "normal")){
-              epiFiles[0].type = NORMAL;}
-            else if(strEqual(line, "index")){
-              epiFiles[0].type = INDEX;}
-            else if(strEqual(line, "leaf")){
-              epiFiles[0].type = LEAF;}
-            printf("==type: %d\n", epiFiles[0].type);
-            free(line);}
+               if(strEqual(trim(lines[i]+5), "normal")){
+                    epiFiles[0].type = NORMAL;}
+               else if(strEqual(trim(lines[i]+5), "index")){
+                    epiFiles[0].type = INDEX;}
+               else if(strEqual(trim(lines[i]+5), "leaf")){
+                    epiFiles[0].type = LEAF;}
+               else{
+                    epiFiles[0].type = NOTYPE;}
+               printf("==type: %d\n", epiFiles[0].type);}
           else if(startsWith(lines[i], "theme ")){
-            line = removeSubstr(lines[i], "theme ");
-            if(strEqual(line, "light")){
-              epiFiles[0].type = LIGHT;}
-            else if(strEqual(line, "dark")){
-              epiFiles[0].type = DARK;}
-            else if(strEqual(line, "black")){
-              epiFiles[0].type = BLACK;}
-            printf("==theme: %d\n", epiFiles[0].type);
-            free(line);}
+               if(strEqual(lines[i]+6, "light")){
+                    epiFiles[0].theme = LIGHT;}
+               else if(strEqual(lines[i]+6, "dark")){
+                    epiFiles[0].theme = DARK;}
+               else if(strEqual(lines[i]+6, "black")){
+                    epiFiles[0].theme = BLACK;}
+               else{
+                    epiFiles[0].theme = NOTHEME;}
+               printf("==theme: %d\n", epiFiles[0].theme);}
           else if(startsWith(lines[i], "desc ")){
-            line = removeSubstr(lines[i], "desc ");
-            epiFiles[0].description = line;
-            printf("==description: %s\n", epiFiles[0].description);
-            free(line);}
+               epiFiles[0].description = lines[i]+5;
+               printf("==description: %s\n", epiFiles[0].description);}
           else if(startsWith(lines[i], "status ")){
-            line = removeSubstr(lines[i], "status ");
-            if(strEqual(line, "active")){
-              epiFiles[0].status = ACTIVE;}
-            else if(strEqual(line, "upcoming")){
-              epiFiles[0].status = UPCOMING;}
-            else if(strEqual(line, "unlisted")){
-              epiFiles[0].status = UNLISTED;}
-            else if(strEqual(line, "hide")){
-              epiFiles[0].status = HIDE;}
-            printf("==status: %d\n", epiFiles[0].status);
-            free(line);}
+               if(strEqual(lines[i]+7, "active")){
+                    epiFiles[0].status = ACTIVE;}
+               else if(strEqual(lines[i]+7, "upcoming")){
+                    epiFiles[0].status = UPCOMING;}
+               else if(strEqual(lines[i]+7, "unlisted")){
+                    epiFiles[0].status = UNLISTED;}
+               else if(strEqual(lines[i]+7, "hide")){
+                    epiFiles[0].status = HIDE;}
+               else{
+                    epiFiles[0].status = NOSTATUS;}
+               printf("==status: %d\n", epiFiles[0].status);}
           else if(startsWith(lines[i], "img ")){
-            line = removeSubstr(lines[i], "img ");
-            epiFiles[0].image = line;
-            printf("==image: %s\n", epiFiles[0].image);
-            free(line);}
+               epiFiles[0].image = lines[i]+4;
+               printf("==image: %s\n", epiFiles[0].image);}
           else if(startsWith(lines[i], TAG_GLYPH)){
-            line = removeSubstr(lines[i], TAG_GLYPH);
-            epiFiles[0].tags[tagIndex] = line;
-            printf("==tag: %s\n", epiFiles[0].tags[tagIndex]);
-            tagIndex++;
-            free(line);}
-           i++;}
-
-
+               epiFiles[0].tags[tagIndex] = lines[i]+strlen(TAG_GLYPH);
+               printf("==tag %d: %s\n", tagIndex, epiFiles[0].tags[tagIndex]);
+               tagIndex++;}
+          else{ /* it's page contents */
+               printf(">>CONTENTS>>%s\n", lines[i]);}
+          i++;}
+     
      freeStringTable(lines);
 
      stopTimer();
