@@ -205,11 +205,11 @@ int main (){
      i=0; /* now getting metadata from the file */
      while(lines[i][0]!=EOF){
           if(startsWith(lines[i], "title ")){
-               epiFiles[0].title = lines[i]+6;
-               printf("==title: %s\n", epiFiles[0].title);}
+               epiFiles[0].title = trim(lines[i]+6);
+               printf("==title: |%s|\n", epiFiles[0].title);}
           else if(startsWith(lines[i], "parent ")){
-               epiFiles[0].parent = lines[i]+7;
-               printf("==parent: %s\n", epiFiles[0].parent);}
+               epiFiles[0].parent = trim(lines[i]+7);
+               printf("==parent: |%s|\n", epiFiles[0].parent);}
           else if(startsWith(lines[i], "type ")){
                if(strEqual(trim(lines[i]+5), "normal")){
                     epiFiles[0].type = NORMAL;}
@@ -221,39 +221,39 @@ int main (){
                     epiFiles[0].type = NOTYPE;}
                printf("==type: %d\n", epiFiles[0].type);}
           else if(startsWith(lines[i], "theme ")){
-               if(strEqual(lines[i]+6, "light")){
+               if(strEqual(trim(lines[i]+6), "light")){
                     epiFiles[0].theme = LIGHT;}
-               else if(strEqual(lines[i]+6, "dark")){
+               else if(strEqual(trim(lines[i]+6), "dark")){
                     epiFiles[0].theme = DARK;}
-               else if(strEqual(lines[i]+6, "black")){
+               else if(strEqual(trim(lines[i]+6), "black")){
                     epiFiles[0].theme = BLACK;}
                else{
                     epiFiles[0].theme = NOTHEME;}
                printf("==theme: %d\n", epiFiles[0].theme);}
           else if(startsWith(lines[i], "desc ")){
-               epiFiles[0].description = lines[i]+5;
-               printf("==description: %s\n", epiFiles[0].description);}
+               epiFiles[0].description = trim(lines[i]+5);
+               printf("==description: |%s|\n", epiFiles[0].description);}
           else if(startsWith(lines[i], "status ")){
-               if(strEqual(lines[i]+7, "active")){
+               if(strEqual(trim(lines[i]+7), "active")){
                     epiFiles[0].status = ACTIVE;}
-               else if(strEqual(lines[i]+7, "upcoming")){
+               else if(strEqual(trim(lines[i]+7), "upcoming")){
                     epiFiles[0].status = UPCOMING;}
-               else if(strEqual(lines[i]+7, "unlisted")){
+               else if(strEqual(trim(lines[i]+7), "unlisted")){
                     epiFiles[0].status = UNLISTED;}
-               else if(strEqual(lines[i]+7, "hide")){
+               else if(strEqual(trim(lines[i]+7), "hide")){
                     epiFiles[0].status = HIDE;}
                else{
                     epiFiles[0].status = NOSTATUS;}
                printf("==status: %d\n", epiFiles[0].status);}
           else if(startsWith(lines[i], "img ")){
-               epiFiles[0].image = lines[i]+4;
-               printf("==image: %s\n", epiFiles[0].image);}
+               epiFiles[0].image = trim(lines[i]+4);
+               printf("==image: |%s|\n", epiFiles[0].image);}
           else if(startsWith(lines[i], TAG_GLYPH)){
-               epiFiles[0].tags[tagIndex] = lines[i]+strlen(TAG_GLYPH);
-               printf("==tag %d: %s\n", tagIndex, epiFiles[0].tags[tagIndex]);
+               epiFiles[0].tags[tagIndex] = trim(lines[i]+strlen(TAG_GLYPH));
+               printf("==tag %d: |%s|\n", tagIndex, epiFiles[0].tags[tagIndex]);
                tagIndex++;}
           else{ /* it's page contents */
-               printf(">>CONTENTS>>%s\n", lines[i]);}
+               printf(">>CONTENTS>>%s\n", trim(lines[i]));}
           i++;}
      
      freeStringTable(lines);

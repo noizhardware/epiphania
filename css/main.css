@@ -3,6 +3,8 @@
   --epi-size: 3fr;
   --icon-size: 30px;
   --selected-glyph: " »";
+  --fontsize: 16px;
+  --fontsize-big: 20px;
 }
 
 /* themes:
@@ -85,7 +87,8 @@ photo {
      color: var(--main-fg);}
 body {
      background-color: var(--main-bg);
-	font-size: large;
+	/*font-size: large;*/
+	font-size: var(--fontsize);
 	color: var(--main-fg);
      font-family: monospace;
      padding:30px}
@@ -175,7 +178,9 @@ header #activity li a:hover {
 /* left menu *************************************/
 #lxmenu {
      margin:0 0 30px;
-     font-size: medium;} 
+     /*font-size: medium;*/
+     font-size: var(--fontsize);
+} 
 #lxmenu ul {
      padding:0;
      margin:0 45px 30px 0;
@@ -202,7 +207,9 @@ header #activity li a:hover {
 /* right menu *************************************/
 #rxmenu {
      margin:0 0 30px;
-     font-size: medium;} 
+     /*font-size: medium;*/
+     font-size: var(--fontsize);
+} 
 #rxmenu ul {
      padding:0;
      margin:0 45px 30px 0;
@@ -234,7 +241,8 @@ main figure:first-child img {
      max-width: calc(100vw - 15px);
      width: 900px }
 main figure figcaption {
-     font-size: 14px;
+     /*font-size: 14px;*/
+     font-size: var(--fontsize);
      max-width:400px }
 main pre { border: 1px solid black;
      padding: 15px;
@@ -258,7 +266,8 @@ main a.external:after{ content:"]" }*/
 
 main q { /* short quotation - Use <blockquote> for long quotations. */
      font-family:serif;
-     font-size:18px;
+     /*font-size:18px;*/
+     font-size: var(--fontsize-big);
      font-style:italic;
      display:block;
      max-width: 400px } 
@@ -348,7 +357,7 @@ footer #cc:hover{
 /* external links *************************************/
 .external { /* external link*/
      text-decoration-line: underline;
-     text-decoration-style: double;}
+     text-decoration-style: solid;}
 .external:hover {
      background-color: var(--link-e-hover);
      color: var(--link-e-text);
@@ -358,7 +367,7 @@ footer #cc:hover{
 /* local links *************************************/
 .local { /* local link*/
      text-decoration-line: underline;
-     text-decoration-style: solid;}
+     text-decoration-style: double;}
 .local:hover { /* local link*/
      background-color: var(--link-e-hover);
      color: var(--link-e-text);
@@ -446,7 +455,8 @@ body {*/
 
 #footer .wr {
     padding: 30px 0px;
-    font-size: 12px;
+    /*font-size: 12px;*/
+    font-size: var(--fontsize);
     line-height: 40px;
     color: black;
     margin: 0px;
