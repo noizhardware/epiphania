@@ -1,4 +1,4 @@
-parent home --parent, in this case it's home, the root of the site
+parent home --parent; in this case it's home, the root of the site
 desc just dive.
 theme dark
 type index --vuoldire che dopo il contenuto che viene descritto qui, verrà messo un elenco di preview di tutti i children

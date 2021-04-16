@@ -1,26 +1,8 @@
-/*#define  _GNU_SOURCE*/
-#define _POSIX_C_SOURCE 200809L /* for getline() and getdelim() */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-/*#include "html.h"*/
+/*** TODO
 
-#include "helpers.h" /* temporary */
-#include "baoutil.h"
-#include "baofiles.h"
+this program writes to testhtml.html now
 
-#define BAOTIME_LONGLONG_ENABLED
-#include "baotime.h"
-
-
-/* ANSI C compliant <3 */
-
-/***
-code documentation block
-***/
-
-/*
-TODO:
+     - see: https://github.com/hundredrabbits/100r.co/blob/master/src/main.c (fputs and fprintf)
      - elimina leading and trailing spaces (possono rimanere dalla rimozione dei comments)
      - get rid of all malloc/calloc
      - images!
@@ -61,9 +43,6 @@ TODO:
 
 * https://www.foo.software/lighthouse
 
-*/
-
-/*
 head10
 dark / light (theme)
 head20
@@ -73,12 +52,44 @@ lxmenu
 head40
 main (page)
 foot10
+
 */
 
+#define EPIPHANIA_VERSION "2021d16-2029"
+
+/*** DEFINES */
+     /*#define  _GNU_SOURCE*/
+     #define _POSIX_C_SOURCE 200809L /* for getline() and getdelim() */
+/* DEFINES end. */
+
+/*** INCLUDES */
+     #include <stdio.h>
+     #include <stdlib.h>
+     #include <string.h>
+     #include <locale.h>
+     /*#include "html.h"*/
+
+     #include "helpers.h" /* cacca: temporary */
+     #include "baoutil.h"
+     #include "baofiles.h"
+
+     #include "baotime.h"
+/* INCLUDES end. */
+
+/*** TYPEDEFS */
+/* TYPEDEFS end. */
+
+/*** GLOBALS */
+/* GLOBALS end. */
+
+/*** FUNCTION DECLARATIONS */
+/* FUNCTION DECLARATIONS end. */
+
+/*** MAIN */
 int main (){
-/* var defs */
+/**** var defs */
      /*char* head10 = "";*/
-     char* fileOut = "testhtml.html";
+     char fileOut[EPI_MAX_FILENAME_LEN] = "site/testhtml.html";
      char* theme;
      char* pageTitle;
      char* html;
@@ -94,113 +105,116 @@ int main (){
      char* epiName;
      epiFile epiFiles[MAX_FILES];
      unsigned int tagIndex = 0;
-/* var defs END */
+/**** var defs END */
+
+     setlocale(LC_NUMERIC, ""); /* to get comma thousand separators for large numbers */
 
      startTimer();
      
-     
-     /* HTML writing test */
+     /**** HTML writing test */
+          theme = "dark";
+          pageTitle = "test";
 
-     theme = "dark";
-     pageTitle = "test";
+          fileReset(fileOut);
+          fileAppendFile("render/head10.html", fileOut);
+          fileAppendString(fileOut, theme);
+          fileAppendFile("render/head20.html", fileOut);
+          fileAppendString(fileOut, pageTitle);
+          fileAppendFile("render/head30.html", fileOut);
+          /*fileAppendFile("render/head30-topimage.html", fileOut);*/
+          fileAppendFile("render/lxmenu_test.html", fileOut);
+          fileAppendFile("render/head40.html", fileOut);
+          /*fileAppendFile("render/head40-topimage.html", fileOut);*/
 
-     fileReset(fileOut);
-     fileAppendFile("render/head10.html", fileOut);
-     fileAppendString(fileOut, theme);
-     fileAppendFile("render/head20.html", fileOut);
-     fileAppendString(fileOut, pageTitle);
-     fileAppendFile("render/head30.html", fileOut);
-     /*fileAppendFile("render/head30-topimage.html", fileOut);*/
-     fileAppendFile("render/lxmenu_test.html", fileOut);
-     fileAppendFile("render/head40.html", fileOut);
-     /*fileAppendFile("render/head40-topimage.html", fileOut);*/
+          fileAppendString(fileOut, "<h1>PORCODIO</h1>\n"); /* MAIN */
+          
+          /* TODO: move this macro in its lib, and move "html" there as well, as a global var */
+          #define HTML_HEADER(string, headerNum, file) html = htmlHeader(string, headerNum);fileAppendString(file, html);free(html);
+               HTML_HEADER ("Header ONE", 1, fileOut);
+               HTML_HEADER ("Header TWO", 2, fileOut);
+               HTML_HEADER ("Header THREE", 3, fileOut);
+               HTML_HEADER ("Header FOUR", 4, fileOut);
+               HTML_HEADER ("Header FIVE", 5, fileOut);
+               HTML_HEADER ("Header SIX", 6, fileOut);
+               /* TODO: write macros for all the other html things */
 
-     fileAppendString(fileOut, "<h1>PORCODIO</h1>\n"); /* MAIN */
-     
-     #define HTML_HEADER(string, headerNum, file) html = htmlHeader(string, headerNum);fileAppendString(file, html);free(html);
-          HTML_HEADER ("Header ONE", 1, fileOut);
-          HTML_HEADER ("Header TWO", 2, fileOut);
-          HTML_HEADER ("Header THREE", 3, fileOut);
-          HTML_HEADER ("Header FOUR", 4, fileOut);
-          HTML_HEADER ("Header FIVE", 5, fileOut);
-          HTML_HEADER ("Header SIX", 6, fileOut);
+          #define HTML_PARAGRAPH(string, file) html = htmlParagraph(string);fileAppendString(fileOut, html);free(html);
+               HTML_PARAGRAPH("plain paragraph", fileOut);
 
-          html = htmlParagraph("plain paragraph");
-               fileAppendString(fileOut, html);
-               free(html);
-
-          html2 = htmlBold("bold text");
-          html = htmlParagraph(html2);
-               fileAppendString(fileOut, html);
-               free(html);
-               free(html2);
-          html2 = htmlItalic("italic text");
-          html = htmlParagraph(html2);
-               fileAppendString(fileOut, html);
-               free(html);
-               free(html2);
-          html3 = htmlItalic("italic and bold text");
-          html2 = htmlBold(html3);
-          html = htmlParagraph(html2);
-               fileAppendString(fileOut, html);
-               free(html);
-               free(html2);
-               free(html3);
-
-          html = htmlParagraph("line break below:");
-               fileAppendString(fileOut, html);
-               free(html);
-               html = htmlBr();
+               html2 = htmlBold("bold text");
+               html = htmlParagraph(html2);
                     fileAppendString(fileOut, html);
                     free(html);
-          html = htmlParagraph("horizontal ruler below:");
-               fileAppendString(fileOut, html);
-               free(html);
-               html = htmlHr();
+                    free(html2);
+               html2 = htmlItalic("italic text");
+               html = htmlParagraph(html2);
+                    fileAppendString(fileOut, html);
+                    free(html);
+                    free(html2);
+               html3 = htmlItalic("italic and bold text");
+               html2 = htmlBold(html3);
+               html = htmlParagraph(html2);
+                    fileAppendString(fileOut, html);
+                    free(html);
+                    free(html2);
+                    free(html3);
+
+               HTML_PARAGRAPH("line break below:", fileOut);
+               #define HTML_LINEBREAK(file) html = htmlBr();fileAppendString(file, html);free(html);
+                    HTML_LINEBREAK(fileOut);
+               HTML_PARAGRAPH("horizontal ruler below:", fileOut);
+               #define HTML_HRULER(file) html = htmlHr();fileAppendString(file, html);free(html);
+                    HTML_HRULER(fileOut);
+               
+               html2 = htmlLinkLoc("localsample", "This is a local link");
+               html = htmlParagraph(html2);
+                    fileAppendString(fileOut, html);
+                    free(html);
+                    free(html2);
+               html2 = htmlLinkExt("http://www.example.com", "This is an external link");
+               html = htmlParagraph(html2);
+                    fileAppendString(fileOut, html);
+                    free(html);
+                    free(html2);
+
+               html2 = htmlCenter("centered text");
+               html = htmlParagraph(html2);
+                    fileAppendString(fileOut, html);
+                    free(html);
+                    free(html2);
+
+               html = htmlList(list, ARRAYELEMS(list));
                     fileAppendString(fileOut, html);
                     free(html);
 
-          html2 = htmlLinkLoc("localsample", "This is a local link");
-          html = htmlParagraph(html2);
-               fileAppendString(fileOut, html);
-               free(html);
-               free(html2);
-          html2 = htmlLinkExt("http://www.example.com", "This is an external link");
-          html = htmlParagraph(html2);
-               fileAppendString(fileOut, html);
-               free(html);
-               free(html2);
+          fileAppendFile("render/foot10.html", fileOut);
+     /**** HTML writing test END. */
 
-          html2 = htmlCenter("centered text");
-          html = htmlParagraph(html2);
-               fileAppendString(fileOut, html);
-               free(html);
-               free(html2);
-
-          html = htmlList(list, ARRAYELEMS(list));
-               fileAppendString(fileOut, html);
-               free(html);
-
-     fileAppendFile("render/foot10.html", fileOut);
-     /* HTML writing test END. */
-
-     /* file reading */
+     /**** file reading */
      /*lines = fileToLines("database/matrixmixers.md", MAX_LINE_SIZE, MAX_LINES_IN_FILE);*/
-     epiName = "features";
+     epiName = "test";
      lines = getArray(epiName);
 
      printf("\n");
      /* delete all comments */
      while(lines[i][0]!=EOF){
-          line = terminateStringOnString(lines[i], COMMENT_GLYPH, true); /* TODO: copiare eliminazione commenti da mass.h, li è fatta meglio */
-          sprintf(lines[i], "%s", line);
+          if(!strEqual(lines[i], "---")){
+               line = terminateStringOnString(lines[i], COMMENT_GLYPH, true); /* TODO: copiare eliminazione commenti da mass.h, li è fatta meglio */
+               sprintf(lines[i], "%s", line);
+               free(line);
+          }
           printf(">>%s\n", lines[i]);
-          free(line);
-          i++;}
+          i++;
+     }
      printf("\n");
+     /* delete all comments END. */
 
-          epiFiles[0].name = epiName;
-          printf("==filename: %s\n", epiFiles[0].name);
+     /* setup output file */
+     epiFiles[0].name = epiName;
+     printf("==filename: %s >> ", epiFiles[0].name);
+     sprintf(fileOut, "site/%s.html", epiName);
+     printf("%s\n", fileOut);
+     fileReset(fileOut);
 
      i=0; /* now getting metadata from the file */
      while(lines[i][0]!=EOF){
@@ -221,15 +235,17 @@ int main (){
                     epiFiles[0].type = NOTYPE;}
                printf("==type: %d\n", epiFiles[0].type);}
           else if(startsWith(lines[i], "theme ")){
-               if(strEqual(trim(lines[i]+6), "light")){
+               sprintf(epiFiles[0].theme, "%s", lines[i]+6);
+               /*if(strEqual(trim(lines[i]+6), "light")){
                     epiFiles[0].theme = LIGHT;}
                else if(strEqual(trim(lines[i]+6), "dark")){
                     epiFiles[0].theme = DARK;}
                else if(strEqual(trim(lines[i]+6), "black")){
                     epiFiles[0].theme = BLACK;}
                else{
-                    epiFiles[0].theme = NOTHEME;}
-               printf("==theme: %d\n", epiFiles[0].theme);}
+                    epiFiles[0].theme = NOTHEME;}*/
+               printf("==theme: %s\n", epiFiles[0].theme);
+          }
           else if(startsWith(lines[i], "desc ")){
                epiFiles[0].description = trim(lines[i]+5);
                printf("==description: |%s|\n", epiFiles[0].description);}
@@ -244,7 +260,19 @@ int main (){
                     epiFiles[0].status = HIDE;}
                else{
                     epiFiles[0].status = NOSTATUS;}
-               printf("==status: %d\n", epiFiles[0].status);}
+               printf("==status: %d\n", epiFiles[0].status);
+               if(epiFiles[0].status==ACTIVE || epiFiles[0].status==UNLISTED){
+                    fileAppendFile("render/head10.html", fileOut);
+                    fileAppendString(fileOut, epiFiles[0].theme);/* css theme */
+                    fileAppendFile("render/head20.html", fileOut);
+                    fileAppendString(fileOut, epiName);/* page title */
+                    fileAppendFile("render/head30.html", fileOut);
+                    /*fileAppendFile("render/head30-topimage.html", fileOut);*/
+                    fileAppendFile("render/lxmenu_test.html", fileOut);
+                    fileAppendFile("render/head40.html", fileOut);
+                    /*fileAppendFile("render/head40-topimage.html", fileOut);*/
+               }
+          }
           else if(startsWith(lines[i], "img ")){
                epiFiles[0].image = trim(lines[i]+4);
                printf("==image: |%s|\n", epiFiles[0].image);}
@@ -253,12 +281,48 @@ int main (){
                printf("==tag %d: |%s|\n", tagIndex, epiFiles[0].tags[tagIndex]);
                tagIndex++;}
           else{ /* it's page contents */
-               printf(">>CONTENTS>>%s\n", trim(lines[i]));}
-          i++;}
-     
+               
+               printf(">>CONTENTS>>%s\n", trim(lines[i]));
+               if(startsWith(lines[i], "# ")){
+                    HTML_HEADER (lines[i]+2, 1, fileOut);
+               }
+               else if(startsWith(lines[i], "## ")){
+                    HTML_HEADER (lines[i]+3, 2, fileOut);
+               }
+               else if(startsWith(lines[i], "### ")){
+                    HTML_HEADER (lines[i]+4, 3, fileOut);
+               }
+               else if(startsWith(lines[i], "#### ")){
+                    HTML_HEADER (lines[i]+5, 4, fileOut);
+               }
+               else if(startsWith(lines[i], "##### ")){
+                    HTML_HEADER (lines[i]+6, 5, fileOut);
+               }
+               else if(startsWith(lines[i], "###### ")){
+                    HTML_HEADER (lines[i]+7, 6, fileOut);
+               }
+               else if(strEqual(lines[i], "---")){
+                    HTML_HRULER(fileOut);
+               }
+               else{
+                    HTML_PARAGRAPH(lines[i], fileOut);
+               }
+               
+          }
+          
+          i++;
+     }
      freeStringTable(lines);
-
-     stopTimer();
-     printf("finished in: %ld.%ldsec\n", elapsed().tv_sec, elapsed().tv_usec);
+          
+     /* the file has ended, let's write the footer */
+     fileAppendFile("render/foot10.html", fileOut);
+     
+     
+     /*printf("finished in: %'.0f nsec\n", getTimerNs());*/
+     printf("==>finished in: %.2f ms\n", getTimerMs());
 
 return 0;}
+/* MAIN end. */
+
+/*** FUNCTION DEFINITIONS */
+/* FUNCTION DEFINITIONS end. */

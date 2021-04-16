@@ -1,19 +1,114 @@
+#ifndef _HELPERS_H_
+#define _HELPERS_H_
 
-#define MAX_LINE_SIZE 256
-#define MAX_LINES_IN_FILE 256
+#define HELPERS_VERSION "2021d15-1834"
 
-#define MAX_FILES 100 /* maximum number of file to be processed */
+/*** TODO
 
-#define COMMENT_GLYPH "--"
-#define TAG_GLYPH ",,"
-#define CONTENT_GLYPH "***"
+*/
 
-/****** EPIPHANIA *******/
-#include"baostring.h"
-#include"baofiles.h"
+/*** INCLUDES */
+     #include"baostring.h" /* files - html */
+     #include"baofiles.h"
+/* INCLUDES end. */
 
-static __inline__ char** getArray(char* filename);
+#ifdef __cplusplus
+     extern "C" {
+#endif
 
+/*** DEFINES */
+     #define MAX_LINE_SIZE 256
+     #define MAX_LINES_IN_FILE 256
+
+     #define MAX_FILES 100 /* maximum number of file to be processed */
+
+     #define COMMENT_GLYPH "--"
+     #define TAG_GLYPH ",,"
+     #define CONTENT_GLYPH "***"
+     
+     /**** EPIPHANIA ONLY */
+          /*#define MAX_TAG_LENGTH 20*/
+          #define EPI_MAX_FILENAME_LEN 32
+          #define EPI_MAX_PARTNAME_LEN 16
+          #define MAX_TAGS 20
+          #define EPI_FILE_EXTENSION ".md"
+     /**** EPIPHANIA ONLY end. */
+     
+/* DEFINES end. */
+
+/*** TYPEDEFS */
+
+/**** EPIPHANIA ONLY */
+typedef enum{
+  NOTYPE,
+  NORMAL,
+  INDEX,
+  LEAF
+} epiType;
+/*typedef enum{
+  NOTHEME,
+  LIGHT,
+  DARK,
+  BLACK
+} epiTheme;*/
+typedef enum{
+  NOSTATUS,
+  ACTIVE,
+  UPCOMING,
+  UNLISTED,
+  HIDE
+} epiStatus;
+
+typedef struct epiFile{
+  char* name;
+  char* title;
+  char* parent;
+  epiType type;
+  char theme[EPI_MAX_PARTNAME_LEN];
+  char* description;
+  epiStatus status;
+  char* image;
+  char* tags[MAX_TAGS];
+  /*char tags[MAX_TAGS][MAX_TAG_LENGTH];*/
+} epiFile;
+/**** EPIPHANIA ONLY end. */
+
+/* TYPEDEFS end. */
+
+/*** GLOBALS */
+/* GLOBALS end. */
+
+/*** FUNCTION DECLARATIONS */
+     /****** EPIPHANIA ONLY *******/
+          static __inline__ char** getArray(char* filename);
+     /****** EPIPHANIA ONLY end. *******/
+     
+     /**** FILES */
+     static __inline__ void fileReset(char* fileName);
+     static __inline__ void fileOverwrite(char* fileName, char* string);
+     static __inline__ void fileAppendString(char* fileName, char* string);
+     static __inline__ void fileAppendFile(char* source, char* dest);
+     static __inline__ char* fileToString(char* file);
+     /**** FILES end. */
+     
+     /**** HTML */
+     static __inline__ char* htmlHeader(char* headerText, unsigned char headerNum);
+     static __inline__ char* htmlParagraph(char* paragraphText);
+     static __inline__ char* htmlBold(char* boldText);
+     static __inline__ char* htmlItalic(char* italicText);
+     static __inline__ char* htmlCenter(char* centeredText);
+     static __inline__ char* htmlBr();
+     static __inline__ char* htmlHr();
+     static __inline__ char* htmlLinkLoc(char* linkAddress, char* linkText);
+     static __inline__ char* htmlLinkExt(char* linkAddress, char* linkText);
+     static __inline__ char* htmlList(char** list, size_t size);
+     /**** HTML end. */
+     
+/* FUNCTION DECLARATIONS end. */
+
+/*** FUNCTION DEFINITIONS */
+
+/**** EPIPHANIA ONLY */
 /* takes a filename and spits out an array of lines */
 static __inline__ char** getArray(char* filename){
      char** out;
@@ -21,19 +116,13 @@ static __inline__ char** getArray(char* filename){
      fn = calloc(1, 10);
      memcpy(fn, "database/", 9);
      fn=appendString(fn, filename);
-     fn=appendString(fn, ".md");
+     fn=appendString(fn, EPI_FILE_EXTENSION);
      out = fileToLines(fn, MAX_LINE_SIZE, MAX_LINES_IN_FILE);
      free(fn);
      return out;}
-/****** EPIPHANIA end.*******/
+/**** EPIPHANIA ONLY end. */
 
-/* files */
-static __inline__ void fileReset(char* fileName);
-static __inline__ void fileOverwrite(char* fileName, char* string);
-static __inline__ void fileAppendString(char* fileName, char* string);
-static __inline__ void fileAppendFile(char* source, char* dest);
-static __inline__ char* fileToString(char* file);
-
+/**** FILES */
 /* empties the file */
 static __inline__ void fileReset(char* fileName){
      FILE* out = fopen(fileName, "w");
@@ -67,7 +156,6 @@ static __inline__ void fileAppendFile(char* source, char* dest){
 
     	free(line);
     	fclose(in);}
-
 /*
 you need to free the var yourself after using it.
 Usage:
@@ -107,24 +195,9 @@ static __inline__ char* fileToString(char* fileName){
      /* close the file and return*/
           fclose(fp);
           return fileContents;}
+/**** FILES end. */
 
-/* files END */
-
-/* HTML */
-#include "baostring.h"
-/*#include "baoutil.h"*/ /* for ARRAYELEMS */
-
-static __inline__ char* htmlHeader(char* headerText, unsigned char headerNum);
-static __inline__ char* htmlParagraph(char* paragraphText);
-static __inline__ char* htmlBold(char* boldText);
-static __inline__ char* htmlItalic(char* italicText);
-static __inline__ char* htmlCenter(char* centeredText);
-static __inline__ char* htmlBr();
-static __inline__ char* htmlHr();
-static __inline__ char* htmlLinkLoc(char* linkAddress, char* linkText);
-static __inline__ char* htmlLinkExt(char* linkAddress, char* linkText);
-static __inline__ char* htmlList(char** list, size_t size);
-
+/**** HTML */
 static __inline__ char* htmlHeader(char* headerText, unsigned char headerNum){ /* headernum must be [1..9] */
      char* output = malloc(3); /* length of <h + terminating 0 */
      strcpy(output, "<h");
@@ -207,48 +280,27 @@ static __inline__ char* htmlList(char** list, size_t size){
      output = appendString(output, "</ul>\n");
 
      return output;}
-/* HTML END */
+/**** HTML end. */
 
-/* epiphania-specific */
+/* FUNCTION DEFINITIONS end. */
 
-typedef enum{
-  NOTYPE,
-  NORMAL,
-  INDEX,
-  LEAF
-} epiType;
-
-typedef enum{
-  NOTHEME,
-  LIGHT,
-  DARK,
-  BLACK
-} epiTheme;
+#ifdef __cplusplus
+     }
+#endif
+#endif /* _HELPERS_H_ */
 
 
-typedef enum{
-  NOSTATUS,
-  ACTIVE,
-  UPCOMING,
-  UNLISTED,
-  HIDE
-} epiStatus;
-
-/*#define MAX_TAG_LENGTH 20*/
-#define MAX_TAGS 20
-
-typedef struct epiFile{
-  char* name;
-  char* title;
-  char* parent;
-  epiType type;
-  epiTheme theme;
-  char* description;
-  epiStatus status;
-  char* image;
-  char* tags[MAX_TAGS];
-  /*char tags[MAX_TAGS][MAX_TAG_LENGTH];*/
-} epiFile;
 
 
-/* epiphania-specific END*/
+
+
+
+
+
+
+
+
+
+
+
+

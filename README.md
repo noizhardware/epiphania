@@ -1,53 +1,28 @@
 # pre-alpha
 
-* filename(not IN the file, the actual name of the file)
-  è il nome che comparirà sul link nel menu (gli _ vengono sostituiti con spazi), also "nHw - " viene aggiunto automaticamente per generare il <title> della page
-* parent
-  è il nome del parent
-  home : no parents
-* type
-  normal : niente di speciale
-  index : vuoldire che dopo il contenuto che viene descritto nel .md stesso, verrà messo un elenco di preview di tutti i children
-  leaf : la pagina è alla fine dell'albero, non ha children
-* theme
-  light - dark >> load light.css or dark.css (implement 100r themes?)
-* desc
-  è la descrizione della pagina corrente, che comparirà nell'index del parent
-* status
-  active : attivo, verrà renderizzato e indicizzato
-  upcoming : verrà indicizzato grayed-out, o strikethru, senza link, la pagina non verrà renderizzata
-  unlisted : verrà renderizzata, ma non indicizzata
-  hide : non viene renderizzata ne indicizzata
+* _filename_ (not IN the file, the actual name of the file)
+  the name with whic the present page will be displayed on the top menu (`_` are converted to whitespace), also `nHw - ` is automatically prepend to generate the page `<title>`.
+* `title` ignored for now?
+* **`parent`**
+  name of the parent page
+  `home` : no parents
+* **`type`**
+  `normal` : ...normal...
+  `index` : after the content described in the file itself, a preview list of all children pages will be displayed.
+  `leaf` : a page at the end of the tree, has no children
+* **`theme`**
+  `light` - `dark` >> load light.css or dark.css
+* **`desc`**
+  description of the current page, will appear in the parent index
+* **`status`**
+  `active` : will be rendered and indexed
+  `upcoming` : will be indexed grayed-out, or strikethru, without a link, the page will not be rendered. it's a placeholder
+  `unlisted` : will be rendered, but not indexed
+  `hide` : won't be rendered-indexed
+* _comments_
+  `-- this is a comment`
 
--- this is a comment
-
----
-## C
-**PRO**
-- easier access to files
-- can modify files
-- real html pages, indexable
-- posso cmq far chiamare il programma in C da node se necessario?
-- easy repl con il mio LISP custom (Ducttape Lisp >> .dtlisp)
-- posso anche fare un mio linguaggetto veloce per il css
-
-**con**
-- re-run each time
-- needs dynamic server // build
-
-## js
-**PRO**
-- fast (modify an .md file >> it's done!)
-- embedded in the html ecosystem
-- possibly interactive
-- edit database natively (requires local node.js)
-- can run locally in node with all privileges.
-- can be hosted on static server - no builds required
-
-**con**
-- cannot access files (.md must be converted!)
-- cannot modify files
-- node
-
+<!--
 ,,site
 ,,coding
+-->
