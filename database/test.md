@@ -14,14 +14,30 @@ desc tests for the Epiphania engine
 
 plain paragraph
 
-[[matrixmixers]](Matrix Mixers)
+**bold text**
 
+_italic text_
+
+**_italic and bold text_**
+
+normal text, then **some bold with _italics_ inside**
+
+this is a [[localsample]](local link)
+this is an external link : https://www.example.com
+this is an external link (www only) : www.example.com
+this is a named https://www.example.com(external link)
+this is a named www.example.com(external link) (www only)
 
 line break below:
 br
 
 horizontal ruler below:
 ---
+ct centered text
+
+- list item one
+- list item two
+- list item three
 
 ,,test
 ,,meta

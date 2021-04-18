@@ -1,7 +1,7 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
-#define HELPERS_VERSION "2021d18-1657"
+#define HELPERS_VERSION "2021d19-0110"
 
 /*** TODO
      - get rid of da fukkin malloc
@@ -117,10 +117,18 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
      uint8_t italic = 0;
      uint8_t local = 0;
      uint8_t external = 0;
+     uint8_t externalName = 0;
+     uint8_t list = 0;/*kak make lists! */
      uint16_t c = 0;
-     char temp[EPI_MAX_LINE_SIZE];
+     char linkBuf[EPI_MAX_LINE_SIZE];
+     uint16_t linkBufIndex;
      
      fileAppendString(fileOut, "<p>");/* open paragraph */
+     if(startsWith(lineIn, "ct ")){/* open centered text */
+          fileAppendString(fileOut, "<center>");
+          local=1;
+          c+=3;
+     }
      
      while(lineIn[c]!='\0'){
           if(startsWith(lineIn+c, "**")){
@@ -159,14 +167,77 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
           else if(startsWith(lineIn+c, ")") && local){
                /* let's close local text */
                fileAppendString(fileOut, "</a>");
+               local=0;
+               c++;
+          }
+          else if(!external && startsWith(lineIn+c, "www.")){
+               /* open external link */
+               fileAppendString(fileOut, "<a href=\"http://www.");
+               sprintf(linkBuf, "http://www.");
+               linkBufIndex=11;
+               external=1;
+               c+=4;
+          }
+          else if(!external && startsWith(lineIn+c, "https:")){
+               /* open external link */
+               fileAppendString(fileOut, "<a href=\"https:");
+               sprintf(linkBuf, "https:");
+               linkBufIndex=6;
+               external=1;
+               c+=6;
+          }
+          else if(!external && startsWith(lineIn+c, "http:")){
+               /* open external link */
+               fileAppendString(fileOut, "<a href=\"http:");
+               sprintf(linkBuf, "http:");
+               linkBufIndex=5;
+               external=1;
+               c+=5;
+          }
+          else if(external && startsWith(lineIn+c, "(")){
+               /* external link name open */
+               externalName=1;
+               fileAppendString(fileOut, "\" target=\"_blank\" class=\"external\">");
+               c++;
+          }
+          else if(external && externalName && startsWith(lineIn+c, ")")){
+               /* external link name close, and close all external */
+               fileAppendString(fileOut, "</a>");
+               external=0;
+               externalName=0;
+               c++;
+          }
+          else if(external && !externalName && startsWith(lineIn+c, " ")){
+               /* unnamed external link, let's close all */
+               linkBuf[linkBufIndex]='\0';
+               fileAppendString(fileOut, "\" target=\"_blank\" class=\"external\">");
+               fileAppendString(fileOut, linkBuf);
+               fileAppendString(fileOut, "</a>");
+               external=0;
+               externalName=0;
                c++;
           }
           else{
+               if(external){
+                    linkBuf[linkBufIndex]=lineIn[c];
+                    linkBufIndex++;
+               }
                fileAppendChar(fileOut, lineIn[c]);
                c++;
           }
      }
      
+     if(external && !externalName){/* it means I had a link at the end of the line, terminater by the '\0' */
+          /* unnamed external link, let's close all */
+          linkBuf[linkBufIndex]='\0';
+          fileAppendString(fileOut, "\" target=\"_blank\" class=\"external\">");
+          fileAppendString(fileOut, linkBuf);
+          fileAppendString(fileOut, "</a>");
+          external=0;
+     }
+     if(startsWith(lineIn, "ct ")){/* close centered text */
+          fileAppendString(fileOut, "</center>");
+     }
      fileAppendString(fileOut, "</p>\n");/* close paragraph */
 }
 
