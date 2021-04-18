@@ -1,2 +1,3 @@
 $ cat .gitattributes
 inspi/* linguist-vendored
+_old/* linguist-vendored

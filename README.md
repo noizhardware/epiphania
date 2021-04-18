@@ -2,7 +2,7 @@
 
 * _filename_ (not IN the file, the actual name of the file)
   the name with whic the present page will be displayed on the top menu (`_` are converted to whitespace), also `nHw - ` is automatically prepend to generate the page `<title>`.
-* `title` ignored for now?
+* **`title`** ignored for now?
 * **`parent`**
   name of the parent page
   `home` : no parents
