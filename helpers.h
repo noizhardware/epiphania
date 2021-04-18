@@ -1,10 +1,10 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
-#define HELPERS_VERSION "2021d15-1834"
+#define HELPERS_VERSION "2021d18-1657"
 
 /*** TODO
-
+     - get rid of da fukkin malloc
 */
 
 /*** INCLUDES */
@@ -17,8 +17,9 @@
 #endif
 
 /*** DEFINES */
-     #define MAX_LINE_SIZE 256
-     #define MAX_LINES_IN_FILE 256
+     #define EPI_MAX_LINE_SIZE 256
+     #define EPI_MAX_LINES_IN_FILE 256
+     /*#define EPI_MAX_NESTED 8*/
 
      #define MAX_FILES 100 /* maximum number of file to be processed */
 
@@ -87,6 +88,7 @@ typedef struct epiFile{
      static __inline__ void fileReset(char* fileName);
      static __inline__ void fileOverwrite(char* fileName, char* string);
      static __inline__ void fileAppendString(char* fileName, char* string);
+     static __inline__ void fileAppendChar(char* fileName, char c);
      static __inline__ void fileAppendFile(char* source, char* dest);
      static __inline__ char* fileToString(char* file);
      /**** FILES end. */
@@ -109,6 +111,67 @@ typedef struct epiFile{
 /*** FUNCTION DEFINITIONS */
 
 /**** EPIPHANIA ONLY */
+
+static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EPI_MAX_FILENAME_LEN]){/*kak*/
+     uint8_t bold = 0;
+     uint8_t italic = 0;
+     uint8_t local = 0;
+     uint8_t external = 0;
+     uint16_t c = 0;
+     char temp[EPI_MAX_LINE_SIZE];
+     
+     fileAppendString(fileOut, "<p>");/* open paragraph */
+     
+     while(lineIn[c]!='\0'){
+          if(startsWith(lineIn+c, "**")){
+               if(bold){/* bold was open */
+                    fileAppendString(fileOut, "</b>");/* now, close it */
+                    bold=0;
+               }
+               else{/* let's open bold */
+                    fileAppendString(fileOut, "<b>");
+                    bold=1;
+               }
+               c+=2;
+          }
+          else if(startsWith(lineIn+c, "_")){
+               if(italic){/* italic was open */
+                    fileAppendString(fileOut, "</i>");/* now, close it */
+                    italic=0;
+               }
+               else{/* let's open italic */
+                    fileAppendString(fileOut, "<i>");
+                    italic=1;
+               }
+               c++;
+          }
+          else if(startsWith(lineIn+c, "[[")){
+               /* let's open local address */
+               fileAppendString(fileOut, "<a href=\"");
+               local=1;
+               c+=2;
+          }
+          else if(startsWith(lineIn+c, "]](") && local){
+               /* let's close local address and open local text */
+               fileAppendString(fileOut, ".html\" class=\"local\">");
+               c+=3;
+          }
+          else if(startsWith(lineIn+c, ")") && local){
+               /* let's close local text */
+               fileAppendString(fileOut, "</a>");
+               c++;
+          }
+          else{
+               fileAppendChar(fileOut, lineIn[c]);
+               c++;
+          }
+     }
+     
+     fileAppendString(fileOut, "</p>\n");/* close paragraph */
+}
+
+
+
 /* takes a filename and spits out an array of lines */
 static __inline__ char** getArray(char* filename){
      char** out;
@@ -117,7 +180,7 @@ static __inline__ char** getArray(char* filename){
      memcpy(fn, "database/", 9);
      fn=appendString(fn, filename);
      fn=appendString(fn, EPI_FILE_EXTENSION);
-     out = fileToLines(fn, MAX_LINE_SIZE, MAX_LINES_IN_FILE);
+     out = fileToLines(fn, EPI_MAX_LINE_SIZE, EPI_MAX_LINES_IN_FILE);
      free(fn);
      return out;}
 /**** EPIPHANIA ONLY end. */
@@ -139,6 +202,12 @@ static __inline__ void fileOverwrite(char* fileName, char* string){
 static __inline__ void fileAppendString(char* fileName, char* string){
      FILE* out = fopen(fileName, "a"); /* using "a" to APPEND */
      if(fwrite(string , sizeof(char) , strlen(string) , out ) != strlen(string)){
+               printf("::== file write error\n");
+               exit(EXIT_FAILURE);}
+     fclose(out);}
+static __inline__ void fileAppendChar(char* fileName, char c){
+     FILE* out = fopen(fileName, "a"); /* using "a" to APPEND */
+     if(fputc(c, out) != c){
                printf("::== file write error\n");
                exit(EXIT_FAILURE);}
      fclose(out);}

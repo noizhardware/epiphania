@@ -2,7 +2,7 @@ title test
 parent meta
 type leaf -- la pagina è alla fine dell'albero, non ha children
 theme dark
-status active
+status unlisted
 desc tests for the Epiphania engine
 
 # Header ONE
@@ -14,11 +14,11 @@ desc tests for the Epiphania engine
 
 plain paragraph
 
-[[matrixmixers]]
+[[matrixmixers]](Matrix Mixers)
 
 
 line break below:
-(not implemented yet lol)
+br
 
 horizontal ruler below:
 ---

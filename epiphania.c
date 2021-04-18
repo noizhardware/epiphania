@@ -55,7 +55,7 @@ foot10
 
 */
 
-#define EPIPHANIA_VERSION "2021d16-2029"
+#define EPIPHANIA_VERSION "2021d18-1657"
 
 /*** DEFINES */
      /*#define  _GNU_SOURCE*/
@@ -283,6 +283,8 @@ int main (){
           else{ /* it's page contents */
                
                printf(">>CONTENTS>>%s\n", trim(lines[i]));
+               
+               
                if(startsWith(lines[i], "# ")){
                     HTML_HEADER (lines[i]+2, 1, fileOut);
                }
@@ -304,8 +306,12 @@ int main (){
                else if(strEqual(lines[i], "---")){
                     HTML_HRULER(fileOut);
                }
+               else if(strEqual(lines[i], "br")){
+                    HTML_LINEBREAK(fileOut);
+               }
                else{
-                    HTML_PARAGRAPH(lines[i], fileOut);
+                    /*HTML_PARAGRAPH(lines[i], fileOut);*/
+                    epiDoLine(lines[i], fileOut);
                }
                
           }
