@@ -55,7 +55,7 @@ foot10
 
 */
 
-#define EPIPHANIA_VERSION "2021d18-1657"
+#define EPIPHANIA_VERSION "2021d19-1710"
 
 /*** DEFINES */
      /*#define  _GNU_SOURCE*/
@@ -273,8 +273,8 @@ int main (){
                     /*fileAppendFile("render/head40-topimage.html", fileOut);*/
                }
           }
-          else if(startsWith(lines[i], "img ")){
-               epiFiles[0].image = trim(lines[i]+4);
+          else if(startsWith(lines[i], "imgg ")){
+               epiFiles[0].image = trim(lines[i]+5);
                printf("==image: |%s|\n", epiFiles[0].image);}
           else if(startsWith(lines[i], TAG_GLYPH)){
                epiFiles[0].tags[tagIndex] = trim(lines[i]+strlen(TAG_GLYPH));

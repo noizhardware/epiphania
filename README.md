@@ -14,6 +14,8 @@
   `light` - `dark` >> load light.css or dark.css
 * **`desc`**
   description of the current page, will appear in the parent index
+* **`imgg`**
+  image that will appear in the parent index, optional
 * **`status`**
   `active` : will be rendered and indexed
   `upcoming` : will be indexed grayed-out, or strikethru, without a link, the page will not be rendered. it's a placeholder

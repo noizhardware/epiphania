@@ -22,7 +22,7 @@
      #define EPI_MAX_LINES_IN_FILE 256
      /*#define EPI_MAX_NESTED 8*/
 
-     #define MAX_FILES 100 /* maximum number of file to be processed */
+     #define MAX_FILES 100 /* maximum number of files to be processed */
 
      #define COMMENT_GLYPH "--"
      #define TAG_GLYPH ",,"
