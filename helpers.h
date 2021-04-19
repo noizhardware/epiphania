@@ -1,10 +1,11 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
-#define HELPERS_VERSION "2021d19-0110"
+#define HELPERS_VERSION "2021d19-1705"
 
 /*** TODO
      - get rid of da fukkin malloc
+     - nested lists might be nice
 */
 
 /*** INCLUDES */
@@ -118,19 +119,26 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
      uint8_t local = 0;
      uint8_t external = 0;
      uint8_t externalName = 0;
-     uint8_t list = 0;/*kak make lists! */
+     static uint8_t list = 0;
+     uint8_t listItem = 0;
      uint16_t c = 0;
      char linkBuf[EPI_MAX_LINE_SIZE];
      uint16_t linkBufIndex;
      
      fileAppendString(fileOut, "<p>");/* open paragraph */
+     
+     if(list && !startsWith(lineIn, "- ")){
+          fileAppendString(fileOut, "</ul>\n");
+          list=0;
+     }
+     
      if(startsWith(lineIn, "ct ")){/* open centered text */
           fileAppendString(fileOut, "<center>");
           local=1;
           c+=3;
      }
      
-     while(lineIn[c]!='\0'){
+     while(lineIn[c]!='\0'){/* loop all chars in line */
           if(startsWith(lineIn+c, "**")){
                if(bold){/* bold was open */
                     fileAppendString(fileOut, "</b>");/* now, close it */
@@ -217,6 +225,16 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
                externalName=0;
                c++;
           }
+          else if(startsWith(lineIn+c, "- ")){
+               /* let's open list if not open, and open listItem */
+               if(!list){
+                    fileAppendString(fileOut, "<ul>\n");
+                    list=1;
+               }
+               fileAppendString(fileOut, "\t<li>");
+               listItem=1;
+               c+=2;
+          }
           else{
                if(external){
                     linkBuf[linkBufIndex]=lineIn[c];
@@ -225,9 +243,9 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
                fileAppendChar(fileOut, lineIn[c]);
                c++;
           }
-     }
+     }/* loop all chars in line */
      
-     if(external && !externalName){/* it means I had a link at the end of the line, terminater by the '\0' */
+     if(external && !externalName){/* I had a link at the end of the line, terminated by the '\0' */
           /* unnamed external link, let's close all */
           linkBuf[linkBufIndex]='\0';
           fileAppendString(fileOut, "\" target=\"_blank\" class=\"external\">");
@@ -237,6 +255,10 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
      }
      if(startsWith(lineIn, "ct ")){/* close centered text */
           fileAppendString(fileOut, "</center>");
+     }
+     if(listItem){/* the current line was a list item, let's close it */
+          fileAppendString(fileOut, "</li>");
+          listItem=0;
      }
      fileAppendString(fileOut, "</p>\n");/* close paragraph */
 }

@@ -34,10 +34,17 @@ br
 horizontal ruler below:
 ---
 ct centered text
+ct centered, and **bold with some _italics_ inside**
 
 - list item one
 - list item two
 - list item three
+
+---
+
+- list item with **bold and _italics_**
+- list item with a named https://www.example.com(external link)
+- list item with a [[localsample]](local link)
 
 ,,test
 ,,meta
