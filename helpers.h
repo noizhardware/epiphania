@@ -1,7 +1,7 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
-#define HELPERS_VERSION "2021d19-1705"
+#define HELPERS_VERSION "2021d20-0234"
 
 /*** TODO
      - get rid of da fukkin malloc
@@ -127,16 +127,16 @@ static __inline__ void epiDoLine(char lineIn[EPI_MAX_LINE_SIZE], char fileOut[EP
      
      fileAppendString(fileOut, "<p>");/* open paragraph */
      
-     if(list && !startsWith(lineIn, "- ")){
+     if(list && !startsWith(lineIn, "- ")){ /* close list */
           fileAppendString(fileOut, "</ul>\n");
           list=0;
      }
-     
-     if(startsWith(lineIn, "ct ")){/* open centered text */
+     else if(startsWith(lineIn, "ct ")){/* open centered text */
           fileAppendString(fileOut, "<center>");
           local=1;
           c+=3;
      }
+     /* kak image!!! */
      
      while(lineIn[c]!='\0'){/* loop all chars in line */
           if(startsWith(lineIn+c, "**")){
