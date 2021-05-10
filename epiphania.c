@@ -1,3 +1,5 @@
+#define EPIPHANIA_VERSION "2021d19-1710"
+
 /*** TODO
 
 this program writes to testhtml.html now
@@ -8,7 +10,8 @@ this program writes to testhtml.html now
      - images!
      - script blocks (js)
      - "linked from" : list of pages that link to the present page, at the end of the present page
-
+     - optimize file access, one open and one close only per file
+     
 <head>
   <meta charset="utf-8">
   <!-- Basic -->
@@ -55,7 +58,6 @@ foot10
 
 */
 
-#define EPIPHANIA_VERSION "2021d19-1710"
 
 /*** DEFINES */
      /*#define  _GNU_SOURCE*/
